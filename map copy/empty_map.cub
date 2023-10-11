@@ -1,0 +1,9 @@
+
+
+F 255,100,251
+
+NO ./image/textureN.xpm
+EA ./image/textureE.xpm
+SO ./image/textureS.xpm
+WE ./image/textureW.xpm
+C 72,74,153

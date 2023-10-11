@@ -1,0 +1,14 @@
+
+C50,50,120
+F100,50,50
+
+NO ./image/textureN.xpm
+SO ./image/textureS.xpm
+WE ./image/textureW.xpm
+EA ./image/textureE.xpm
+
+111111111
+11000S01
+110000001
+11111111
+

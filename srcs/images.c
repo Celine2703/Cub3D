@@ -21,30 +21,44 @@ int main(){
         {1,0,0,0,1,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1}
     };
-
+    (void)map;
     mlx = mlx_init();
-    win = mlx_new_window(mlx, 1000, 1000, "mlx 42");
+    win = mlx_new_window(mlx, 500, 500, "mlx 42");
     x = 0;
     y = 0;
     i = 0;
     j = 0;
-    while (i < 10)
+
+    while (i < 250) // La moitié supérieure
     {
-        while (j < 10)
+        while (j < 500)
         {
-            if (map[i][j] == 1)
-                color = 0x00FF0000;
-            else
-                color = 0x0000FF00;
+            color = 0x000000FF; // Bleu
             mlx_pixel_put(mlx, win, x, y, color);
-            x += 100;
+            x++;
             j++;
         }
         x = 0;
-        y += 100;
+        y++;
         i++;
         j = 0;
     }
+
+    while (i < 500) // La moitié inférieure
+    {
+        while (j < 500)
+        {
+            color = 0x0000FF00; // Vert
+            mlx_pixel_put(mlx, win, x, y, color);
+            x++;
+            j++;
+        }
+        x = 0;
+        y++;
+        i++;
+        j = 0;
+    }
+
     mlx_loop(mlx);
     return (0);
 }

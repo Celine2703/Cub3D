@@ -16,11 +16,11 @@ DEPS 		= 	${OBJS:.o=.d}
 
 LIBFT		=	./Libft/libft.a
 
-MAIN		=	
+MAIN		=	main.c
 
-CORE		=	
+CORE		=	images.c
 
-PARSING		=	images.c
+PARSING		=	splitUtils.c readFile.c parseUtils.c parseMap.c parseFile.c errors_utils.c
 
 SRCS		=	${MAIN} ${CORE} ${PARSING}
 
