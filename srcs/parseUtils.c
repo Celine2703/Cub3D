@@ -27,6 +27,13 @@ void	destroy_data(t_data *data)
 	free(data->north);
 	free(data->south);
 	free(data->file);
+	i = 0;
+	while (data->map.tab[i] != NULL)
+	{
+		free(data->map.tab[i]);
+		i++;
+	}
+	free(data->map.tab);
 }
 
 int	iswhitespace(char c)
@@ -76,6 +83,7 @@ int	parse_error(t_data *data)
 	int	error;
 
 	error = parsefile(data);
+	printf("err111or");
 	if (error != 0)
 	{
 		if (missinfo(*data) == 0)

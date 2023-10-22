@@ -33,7 +33,7 @@ t_wallhit calcule_vertical (char  map[][10], t_player player)
 {
     t_wallhit wallhit;
 
-    bzero(&wallhit, sizeof(t_wallhit)); // a mettre avec libft
+    ft_bzero(&wallhit, sizeof(t_wallhit)); // a mettre avec libft
     if (player.angle > 0 && player.angle < M_PI)
         wallhit.y = ceil(player.posy);
     else

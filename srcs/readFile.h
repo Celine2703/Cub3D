@@ -18,48 +18,8 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 # include "../Get_next_line/get_next_line.h"
+# include "structs.h"
 
-typedef struct s_color
-{
-	int		red;
-	int		green;
-	int		blue;
-}	t_color;
-
-typedef struct s_map
-{
-	char	**tab;
-	int		map_width;
-	int		map_height;
-}	t_map;
-
-typedef struct s_player
-{
-	double	pos_x;
-	double	pos_y;
-	double	angle;
-}	t_player;
-
-typedef struct s_data
-{
-	char		**file;
-	char		*filename;
-	t_map		map;
-	t_player	player;
-	int			nb_lines;
-	t_color		ceiling;
-	t_color		floor;
-	char		*north;
-	char		*south;
-	char		*east;
-	char		*west;
-}	t_data;
-
-typedef struct s_pair
-{
-	int		first;
-	int		second;
-}	t_pair;
 
 // readFile.c
 int	init_data(t_data *data, int argc, char **argv);
@@ -98,7 +58,9 @@ int		missinfo(t_data data);
 int		parseMap(t_data *data);
 int		ft_startmap(char **fil, t_pair *lines);
 int		find_longest(char **file, t_pair lines);
-int		find_copy_map(t_data data, t_pair lines);
+int		find_copy_map(t_data *data, t_pair lines);
+
+
 
 
 

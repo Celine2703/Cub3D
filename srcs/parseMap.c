@@ -18,15 +18,20 @@ int parseMap(t_data *data)
 	int longest_line;
 	
 	if (ft_startmap(data->file, &lines))
+	{
+		printf("Error\n");
 		return (-1);
+	}
 	printf("start %d  end %d\n", lines.first, lines.second);
 	longest_line = find_longest(data->file, lines);
 	printf("longest %d\n", longest_line);
 	data->map.map_height = lines.second - lines.first + 1;
 	data->map.map_width = longest_line;
-	if (find_copy_map(*data, lines) == -1) 
+	if (find_copy_map(data, lines) == -1) 
 		return (-1);
+	// reverse_map(data->map);
 	printsplit(data->map.tab);
+	
 	// on obtient le nb de ligne de la map
 	// on obtient la largeur de la map (la plus grande ligne)
 	// on alloue la map
@@ -39,20 +44,20 @@ int parseMap(t_data *data)
 	return(0);
 }
 
-int	find_copy_map(t_data data, t_pair lines)
+int	find_copy_map(t_data *data, t_pair lines)
 {
 	int i;
 	
-	data.map.tab = ft_calloc(data.map.map_height, sizeof(char *));\
-	if (data.map.tab == NULL)
+	data->map.tab = ft_calloc(data->map.map_height + 1, sizeof(char *));
+	if (data->map.tab == NULL)
 		return (-1);
 	i = 0;
-	while (i < data.map.map_height)
+	while (i < data->map.map_height)
 	{
-		data.map.tab[i] = ft_calloc(data.map.map_width + 1, sizeof(char));
-		if (data.map.tab[i] == NULL)
+		data->map.tab[i] = ft_calloc(data->map.map_width + 1, sizeof(char));
+		if (data->map.tab[i] == NULL)
 			return (-1);
-		ft_strlcpy(data.map.tab[i], data.file[lines.first + i], data.map.map_width);
+		ft_strlcpy(data->map.tab[i], data->file[lines.first + i], data->map.map_width);
 		i++;
 	}
 	return (0);
@@ -100,4 +105,23 @@ int	ft_startmap(char **file, t_pair *lines)
 		i++;
 	}
 	return (0);
+}
+
+void reverse_map(t_map map)
+{
+	int start;
+	int end;
+	char *tmp;
+	start = 0;
+	end = map.map_height - 1;
+
+	while (start < end)
+	{
+		tmp = map.tab[start];
+		map.tab[start] = map.tab[end];
+		map.tab[end] = tmp;
+		start++;
+		end--;
+	}
+	
 }

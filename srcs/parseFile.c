@@ -40,14 +40,19 @@ int	parsefile(t_data *data)
 
 	lineread = 0;
 	nb = 0;
+	printsplit(data->file);
 	while (nb < 7 && data->file[lineread] != NULL)
 	{
 		line = deletewhitespace(data->file[lineread]);
 		type = whichline(line);
+		printf("line :  \n");
 		if (type == -1 && nb != 6)
 			return (free(line), lineread + 1);
 		else if (type <= 4 && ++nb && readpath(type, line, data) == -1)
+		{
+			// printf("line : %s\n", line);
 			return (free(line), lineread + 1);
+		}
 		else if (type == 5 && ++nb && getcolor(line, &data->ceiling) == -1)
 			return (free(line), lineread + 1);
 		else if (type == 6 && ++nb && getcolor(line, &data->floor) == -1)

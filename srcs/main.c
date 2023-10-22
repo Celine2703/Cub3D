@@ -31,19 +31,21 @@ void	printinfo(t_data data)
 	printf("map = \n");
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_data	data;
+int	main(int argc, char **argv)
+{
+	t_data	data;
 
-// 	if (init_data(&data, argc, argv))
-// 		return (0);
-// 	if (parse_error(&data))
-// 		return (0);
-// 	printf("Success\n");
+	if (init_data(&data, argc, argv))
+		return (0);
+	// printsplit(data.file);
+	// printinfo(data);
+	if (parse_error(&data))
+		return (0);
+	printf("Success\n");
 	
-// 	// printinfo(data);
-// 	parseMap(&data);
-// 	destroy_data(&data);
-// 	return (0);
-// }
+	// printinfo(data);
+	// parseMap(&data);
+	// destroy_data(&data);
+	return (0);
+}
 
