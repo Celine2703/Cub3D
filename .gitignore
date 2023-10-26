@@ -1,0 +1,5 @@
+*.o
+*.d
+*.a
+cub3D
+.vscode

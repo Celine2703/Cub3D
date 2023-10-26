@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include "../libft/libft.h"
 #include "readFile.h"
+#include "structs.h"
+#include "cub3d.h"
 
 void	printinfo(t_data data)
 {
@@ -34,18 +36,18 @@ void	printinfo(t_data data)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-
+	
 	if (init_data(&data, argc, argv))
 		return (0);
-	// printsplit(data.file);
-	// printinfo(data);
 	if (parse_error(&data))
 		return (0);
 	printf("Success\n");
 	
 	// printinfo(data);
-	// parseMap(&data);
-	// destroy_data(&data);
+	parseMap(&data);
+	// printinfo(data);
+	// initmlx (&data);
+	destroy_data(&data);
 	return (0);
 }
 

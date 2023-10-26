@@ -18,7 +18,7 @@ LIBFT		=	./Libft/libft.a
 
 MAIN		=	main.c
 
-CORE		=	images.c
+CORE		=	images.c calcul.c
 
 PARSING		=	splitUtils.c readFile.c parseUtils.c parseMap.c parseFile.c errors_utils.c
 
@@ -42,7 +42,7 @@ all			: ${NAME}
 # 		@${CC} ${FLAGS}  -c $< -o ${<:.c=.o}
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c
-		@${CC} ${FLAGS} -c $< -o $@
+		${CC} ${FLAGS} -c $< -o $@
 
 ${LIBFT}	:
 		@echo "\033[35m----Building libft----"

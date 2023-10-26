@@ -2,6 +2,50 @@
 #include "../minilibx-linux/mlx.h"
 #include "readfile.h"
 
+void change_image(t_data *data);
+
+int initmlx(t_data *data)
+{
+    data->mlx = mlx_init();
+    if (data->mlx == NULL)
+        return 1;
+    data->win = mlx_new_window(data->mlx, 640, 640, "CUB1D");
+    if (data->win == NULL)
+        return 1;
+    create_base_image (data->floor, data->ceiling, data->mlx, data);
+    // change_image(data)
+    // calcule_dist(data->map.tab, data->player, 0);
+    data->player.posx = 3;
+    data ->player.posy = 3;
+    data ->player.angle = 0;
+    change_image(data);
+    mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
+    mlx_loop(data->mlx);
+    return 0;
+}
+
+
+
+void change_image(t_data *data)
+{
+    t_wallhit distance[640];
+    int x = 0;
+    double PI = -(2.0*M_PI)/9.0;
+
+    // printf("map : %c\n" ,data->map.tab[0][0]);
+    while (x < 640)
+    {
+        // printf ("PI = %f", PI);
+        distance[x] = calcule_dist(data->map.tab, data->player, PI);
+        printf("distance[%d] = %f\n", x, distance->dist);
+        x++;
+        PI += (4.0*M_PI)/(9.0 * 640.0);
+    }
+    (void )distance;
+    
+    // on commence par calculer la distance du mur pour chaque colonne
+    // ensuite double boucle ou on parcours toute l'image pour mettre le pixel correspondant
+}
 // int main(){
 //     void *mlx;
 //     void *win;

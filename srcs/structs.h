@@ -36,10 +36,10 @@ typedef struct s_pair
 
 typedef struct s_wallhit
 {
-    double dist;
-    double x;
-    double y;
-    int wall;
+    double 	dist;
+    double 	x;
+    double 	y;
+    int 	mur;
 } t_wallhit;
 
 typedef struct s_image
@@ -65,6 +65,8 @@ typedef struct s_data
 	char		*east;
 	char		*west;
     t_image     base;
+	void		*mlx;
+	void		*win;
 }	t_data;
 
 #endif

@@ -59,8 +59,9 @@ int		parseMap(t_data *data);
 int		ft_startmap(char **fil, t_pair *lines);
 int		find_longest(char **file, t_pair lines);
 int		find_copy_map(t_data *data, t_pair lines);
+void reverse_map(t_map map);
 
-
+int combinecolor(t_color *color);
 
 
 

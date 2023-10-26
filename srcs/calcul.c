@@ -1,10 +1,12 @@
 #include "cub3d.h"
+#include "structs.h"
+#include "../libft/libft.h"
 
-t_wallhit calcule_horizontal(char  map[][10], t_player player)
+t_wallhit calcule_horizontal(char  **map, t_player player)
 {
     t_wallhit wallhit;
 
-    bzero(&wallhit, sizeof(t_wallhit)); // a mettre avec libft
+    ft_bzero(&wallhit, sizeof(t_wallhit)); // a mettre avec libft
     if (player.angle > 3*M_PI/2 || player.angle < M_PI/2)
         wallhit.x = ceil(player.posx);
     else
@@ -29,7 +31,7 @@ t_wallhit calcule_horizontal(char  map[][10], t_player player)
     return (wallhit);
 }
 
-t_wallhit calcule_vertical (char  map[][10], t_player player)
+t_wallhit calcule_vertical (char  **map, t_player player)
 {
     t_wallhit wallhit;
 
@@ -88,11 +90,12 @@ double calcule_x(t_player player, double y)
         return (-O);
 }
 
-t_wallhit calcule_dist(char  map[][10], t_player player)
+t_wallhit calcule_dist(char  **map, t_player player, double angle)
 {
     t_wallhit dist_h;
     t_wallhit dist_v;
-
+    (void) angle;
+    player.angle += angle;
     player.cosinus = cos(player.angle);
     player.sinus = sin(player.angle);
     if (player.angle == M_PI/2 || player.angle == 3*M_PI/2)
@@ -110,7 +113,7 @@ t_wallhit calcule_dist(char  map[][10], t_player player)
     }
 }
 
-void printmap(char map[][10])
+void printmap(char **map)
 {
     int i;
 
@@ -122,21 +125,21 @@ void printmap(char map[][10])
     }
 }
 
-int main()
-{
-    char map[10][10]={  "11111",
-                        "10001",
-                        "10011",
-                        "10001",
-                        "11111"};
-    t_player player;
+// int main()
+// {
+//     char map[10][10]={  "11111",
+//                         "10001",
+//                         "10011",
+//                         "10001",
+//                         "11111"};
+//     t_player player;
     
-    player.posx = 1.5;
-    player.posy = 1.5;
-    player.angle = M_PI/2;
+//     player.posx = 1.5;
+//     player.posy = 1.5;
+//     player.angle = M_PI/2;
 
     
-    printmap(map);
-    printf("dist = %f\n", calcule_dist(map, player).dist);
-    return (0);
-}
+//     printmap(map);
+//     printf("dist = %f\n", calcule_dist(map, player).dist);
+//     return (0);
+// }

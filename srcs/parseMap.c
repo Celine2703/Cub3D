@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "readFile.h"
+#include "cub3d.h"
+
+double select_direction(char dir);
+void replace_spaceandplayer(t_data *data);
 
 int parseMap(t_data *data)
 {
@@ -22,16 +26,17 @@ int parseMap(t_data *data)
 		printf("Error\n");
 		return (-1);
 	}
-	printf("start %d  end %d\n", lines.first, lines.second);
+	// printf("start %d  end %d\n", lines.first, lines.second);
 	longest_line = find_longest(data->file, lines);
-	printf("longest %d\n", longest_line);
+	// printf("longest %d\n", longest_line);
 	data->map.map_height = lines.second - lines.first + 1;
 	data->map.map_width = longest_line;
 	if (find_copy_map(data, lines) == -1) 
 		return (-1);
-	// reverse_map(data->map);
-	printsplit(data->map.tab);
-	
+	reverse_map(data->map);
+	// replace_spaceandplayer(data);
+	 printsplit(data->map.tab);
+	// printf("la\n");
 	// on obtient le nb de ligne de la map
 	// on obtient la largeur de la map (la plus grande ligne)
 	// on alloue la map
@@ -43,7 +48,45 @@ int parseMap(t_data *data)
 	// on verifie que la map est entouree de 1 (donc chaque 0 
 	return(0);
 }
+void replace_spaceandplayer(t_data *data)
+{
+	int i;
+	int j;
 
+	i = 0;
+	while (data->map.tab[i])
+	{
+		j = 0;
+		while (data->map.tab[i][j])
+		{
+			if (data->map.tab[i][j] == ' ')
+				data->map.tab[i][j] = '1';
+			if (data->map.tab[i][j] == 'N' || data->map.tab[i][j] == 'S' || data->map.tab[i][j] == 'E' || data->map.tab[i][j] == 'W')
+			{
+				data->player.angle = select_direction(data->map.tab[i][j]);
+				data->map.tab[i][j] = '0';
+				data->player.posx = j + 0.5;
+				data->player.posy = i + 0.5;
+				// printf("posx %f posy %f angle %f\n", data->player.posx, data->player.posy, data->player.angle);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+double select_direction(char dir)
+{
+	if (dir == 'N')
+		return (M_PI / 2);
+	if (dir == 'S')
+		return (3 * M_PI / 2);
+	if (dir == 'E')
+		return (0);
+	if (dir == 'W')
+		return (M_PI);
+	return (0);
+}
 int	find_copy_map(t_data *data, t_pair lines)
 {
 	int i;

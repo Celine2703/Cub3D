@@ -49,7 +49,7 @@ char	*deletewhitespace(char *line)
 	int		i;
 
 	i = 0;
-	ret = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+	ret = ft_calloc(ft_strlen(line) + 2, sizeof(char));
 	if (ret == NULL)
 		return (NULL);
 	while (*line != '\0')
@@ -61,6 +61,7 @@ char	*deletewhitespace(char *line)
 		}
 		line++;
 	}
+	// printf("line : %s\n", ret);
 	return (ret);
 }
 
@@ -83,7 +84,7 @@ int	parse_error(t_data *data)
 	int	error;
 
 	error = parsefile(data);
-	printf("err111or");
+	// printf("err111or");
 	if (error != 0)
 	{
 		if (missinfo(*data) == 0)
