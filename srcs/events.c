@@ -6,7 +6,7 @@
 /*   By: cmartin <cmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/10/27 09:47:07 by cmartin          ###   ########.fr       */
+/*   Updated: 2023/10/27 12:49:59 by cmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ void    ft_putmov(t_player player, double angle){
     else if (player->angle >= 3*M_PI/2 && player->angle <= 2*M_PI)
         player->posx += cos(player->angle)*0.2;
         player->posy -= sin(player->angle)*0.2;
+}
+
+void    ft_movbis(t_map map, t_player player, int key){
+    if(key == 'w')
+        ft_putmov(player, player->angle);
+    else if(key == 'a')
+        player->angle += M_PI/20;
+    else if(key == 's')
+        ft_putmov(player, player->angle + M_PI);
+    else if(key == 'd')
+        player->angle -= M_PI/20;
 }
 
 int ft_mov(t_map map, t_player player, int key){

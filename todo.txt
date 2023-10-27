@@ -8,3 +8,5 @@ il reste coté affichage
 Coté mlx :
 - importer les texture sous format image (mlxcreateImagefrom...()) et remplir notre structure correspondante
 - creer les évènements de deplacement et de rotation
+
+attention si angle devenait négatif?
