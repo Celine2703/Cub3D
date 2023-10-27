@@ -16,8 +16,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "../libft/libft.h"
-# include "../Get_next_line/get_next_line.h"
+# include "../Libft/libft.h"
+# include "../Libft/get_next_line.h"
 # include "structs.h"
 
 // readFile.c

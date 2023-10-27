@@ -10,3 +10,4 @@ Coté mlx :
 - creer les évènements de deplacement et de rotation
 
 attention si angle devenait négatif?
+vérifier si le joueur est dans un mur

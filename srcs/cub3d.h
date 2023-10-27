@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "structs.h"
+#include "../minilibx-linux/mlx.h"
 
 t_wallhit	calcule_horizontal(char	**map, t_player	player);
 t_wallhit	calcule_vertical(char	**map, t_player	player);
@@ -28,5 +29,17 @@ void		printmap(char **map);
 
 int			initmlx(t_data *data);
 int			create_base_image(t_color f, t_color ceil, void *mlx, t_data *d);
+
+int			ft_key(int key, t_data *data);
+int			ft_mov(t_map map, t_player *player, int key);
+void		ft_putmov(t_player *player, double angle);
+// void		ft_movbis(t_map map, t_player *player, int key);
+
+//clear.c
+void    ft_mapclear(t_map *map);
+void    ft_playerclear(t_player *player);
+void    ft_dataclear(t_data *data);
+void    ft_stop(t_map *map, void *mlx);
+void	ft_destroy(t_data *data);
 
 #endif

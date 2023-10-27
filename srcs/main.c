@@ -43,10 +43,10 @@ int	main(int argc, char **argv)
 		return (0);
 	printf("Success\n");
 	
-	// printinfo(data);
+	printinfo(data);
 	parseMap(&data);
 	// printinfo(data);
-	// initmlx (&data);
+	initmlx (&data);
 	destroy_data(&data);
 	return (0);
 }

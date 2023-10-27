@@ -12,14 +12,15 @@ int initmlx(t_data *data)
     data->win = mlx_new_window(data->mlx, 640, 640, "CUB1D");
     if (data->win == NULL)
         return 1;
-    create_base_image (data->floor, data->ceiling, data->mlx, data);
-    // change_image(data)
-    // calcule_dist(data->map.tab, data->player, 0);
+    // create_base_image (data->floor, data->ceiling, data->mlx, data);
+    // // change_image(data)
+    // // calcule_dist(data->map.tab, data->player, 0);
     data->player.posx = 3;
     data ->player.posy = 3;
     data ->player.angle = 0;
-    change_image(data);
-    mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
+    mlx_key_hook(data->win, ft_key, data);
+    // change_image(data);
+    // mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
     mlx_loop(data->mlx);
     return 0;
 }
