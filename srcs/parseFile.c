@@ -65,20 +65,14 @@ int	getcolor(char *line, t_color *color)
 
 	if (color->red != -1)
 		return (print_error_color(line[0]));
-	// printf("line : %s\n", line);
 	i = 0;
 	split = ft_split(line + 1, ',');
 	if (!split || sizesplit(split) != 3)
 		return (freesplit(split), -1);
-	// printf("split : %s\n", split[2]);
 	while (split[i] != NULL)
 	{
 		if (isallnb(split[i]) == -1)
-		{
-			// printf("split : %s\n", split[2]);
-			printf("Error: %s  %d is not a number\n", split[2], i);
 			return (freesplit(split), -1);
-		}
 		nb = ft_atoi(split[i]);
 		if (nb < 0 || nb > 255)
 			return (freesplit(split), -1);
@@ -92,14 +86,14 @@ int	getcolor(char *line, t_color *color)
 	return (freesplit(split), combinecolor(color));
 }
 
-int combinecolor(t_color *color)
+int	combinecolor(t_color *color)
 {
 	color -> color = color -> red;
 	color -> color = color -> color << 8;
 	color -> color += color ->green;
 	color -> color = color -> color << 8;
 	color -> color += color -> blue;
-	return 0;
+	return (0);
 }
 
 int	parsefile(t_data *data)
@@ -111,22 +105,14 @@ int	parsefile(t_data *data)
 
 	lineread = 0;
 	nb = 0;
-	// printsplit(data->file);
 	while (nb < 7 && data->file[lineread] != NULL)
 	{
-		
 		type = whichline(line);
-		
 		line = deletewhitespace(data->file[lineread]);
-		// printf("line : %s \n", line);
-		// printf("type : %d \n", type);
 		if (type == -1 && nb != 6)
 			return (free(line), lineread + 1);
 		else if (type <= 4 && ++nb && readpath(type, line, data) == -1)
-		{
-			// printf("line : %s\n", line);
 			return (free(line), lineread + 1);
-		}
 		else if (type == 5 && ++nb && getcolor(line, &data->ceiling) == -1)
 			return (free(line), lineread + 1);
 		else if (type == 6 && ++nb && getcolor(line, &data->floor) == -1)

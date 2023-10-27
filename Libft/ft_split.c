@@ -20,7 +20,7 @@ static int	ft_init(int i, const char *str, char s)
 	c = i;
 	cpt = 0;
 	while (str[c] && (str[c++] != s))
-			cpt++;
+		cpt++;
 	return (cpt);
 }
 
