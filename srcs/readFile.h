@@ -20,11 +20,9 @@
 # include "../Get_next_line/get_next_line.h"
 # include "structs.h"
 
-
 // readFile.c
-int	init_data(t_data *data, int argc, char **argv);
+int		init_data(t_data *data, int argc, char **argv);
 void	destroy_data(t_data *data);
-
 
 char	**getfile(t_data *data);
 int		checkfilename(char *filename);
@@ -59,10 +57,8 @@ int		parseMap(t_data *data);
 int		ft_startmap(char **fil, t_pair *lines);
 int		find_longest(char **file, t_pair lines);
 int		find_copy_map(t_data *data, t_pair lines);
-void reverse_map(t_map map);
+void	reverse_map(t_map map);
 
-int combinecolor(t_color *color);
-
-
+int		combinecolor(t_color *color);
 
 #endif
