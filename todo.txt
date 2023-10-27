@@ -1,1 +1,10 @@
 vérifier le nom de l'exécutable
+faire les events
+
+il reste coté affichage
+- calculer la distance et la taille du mur pour chaque colonne de la fenetre (une boucle sur le calcul de distance avec l'angle qui varie de -40 a +40) 
+- selectioner le bon pixel de la bonne texture 
+- on modifie l'image avec ce pixel
+Coté mlx :
+- importer les texture sous format image (mlxcreateImagefrom...()) et remplir notre structure correspondante
+- creer les évènements de deplacement et de rotation
