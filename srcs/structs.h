@@ -76,6 +76,7 @@ typedef struct s_data
 	t_image		base;
 	void		*mlx;
 	void		*win;
+	t_image	textures[4];
 }	t_data;
 
 #endif
