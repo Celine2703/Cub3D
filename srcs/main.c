@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../libft/libft.h"
+#include "../Libft/libft.h"
 #include "readFile.h"
 #include "structs.h"
 #include "cub3d.h"
@@ -36,21 +36,21 @@ void	printinfo(t_data data)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-
+	(void)data;
 	(void)argc;
 	(void)argv;
 	
-	// if (init_data(&data, argc, argv))
-	// 	return (0);
-	// if (parse_error(&data))
-	// 	return (0);
-	// printf("Success\n");
+	if (init_data(&data, argc, argv))
+		return (0);
+	if (parse_error(&data))
+		return (0);
+	printf("Success\n");
 	
-	// printinfo(data);
+	printinfo(data);
 	// parseMap(&data);
 	// // printinfo(data);
-	initmlx (&data);
-	// destroy_data(&data);
+	// initmlx (&data);
+	ft_destroy_data(&data);
 	return (0);
 }
 

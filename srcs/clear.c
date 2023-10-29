@@ -32,7 +32,7 @@ void	ft_mapclear(t_map *map)
 void	ft_stop(t_map *map, void *mlx)
 {
 	ft_mapclear(map);
-	mlx_destroy_display(mlx);
+	// mlx_destroy_display(mlx);
 	free(mlx);
 }
 
@@ -46,8 +46,7 @@ int	ft_destroy_data(t_data *data)
 	free(data->west);
 	free(data->north);
 	free(data->south);
-	free(data->file);
-	free(data->filename);
+	// free(data->file);
 	int i = 0;
 	while (data->file[i])
 	{

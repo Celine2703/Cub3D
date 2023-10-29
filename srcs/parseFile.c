@@ -14,9 +14,9 @@
 
 int	whichline(char *line)
 {
-	if (!line || ft_strlen(line) == 0)
+	if (!line )
 		return (-1);
-	if (ft_strlen(line) == 1)
+	if (ft_strlen(line) == 0)
 		return (7);
 	if (line[0] == 'N' && line[1] == 'O')
 		return (1);

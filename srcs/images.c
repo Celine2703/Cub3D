@@ -1,6 +1,6 @@
 #include "cub3d.h"
 #include "../minilibx-linux/mlx.h"
-#include "readfile.h"
+#include "readFile.h"
 
 void change_image(t_data *data);
 
