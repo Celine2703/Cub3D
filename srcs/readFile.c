@@ -44,7 +44,7 @@ int	getallline(t_data *data)
 	{
 		size_t len = ft_strlen(line);
 		if (len >= 2)
-			line[len - 2] = 0;
+			line[len - 1] = 0;
 		else
 			line[0] = 0;
 		data->file[i] = line;

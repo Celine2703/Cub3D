@@ -1,6 +1,6 @@
 #include "cub3d.h"
 #include "../minilibx-linux/mlx.h"
-#include "readfile.h"
+#include "readFile.h"
 
 void change_image(t_data *data);
 
@@ -27,8 +27,6 @@ int initmlx(t_data *data)
 }
 // mlx_hook(data->win, 02, 1L << 0, key_hook, data);
 // mlx_hook(data->win, 17, 0, destroy_data, data);
-
-
 
 void change_image(t_data *data)
 {

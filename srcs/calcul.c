@@ -1,6 +1,6 @@
 #include "cub3d.h"
 #include "structs.h"
-#include "../libft/libft.h"
+#include "../Libft/libft.h"
 
 t_wallhit calcule_horizontal(char  **map, t_player player)
 {
