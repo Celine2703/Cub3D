@@ -31,6 +31,7 @@ void	printinfo(t_data data)
 	printf("map_width = %d\n", data.map.map_width);
 	printf("map_height = %d\n", data.map.map_height);
 	printf("map = \n");
+	printsplit(data.map.tab);
 }
 
 int	main(int argc, char **argv)
@@ -46,9 +47,9 @@ int	main(int argc, char **argv)
 		return (0);
 	printf("Success\n");
 	
+	// printinfo(data);
+	parseMap(&data);
 	printinfo(data);
-	// parseMap(&data);
-	// // printinfo(data);
 	// initmlx (&data);
 	ft_destroy_data(&data);
 	return (0);

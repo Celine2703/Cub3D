@@ -14,7 +14,10 @@
 #include "cub3d.h"
 
 double select_direction(char dir);
-void replace_spaceandplayer(t_data *data);
+// void replace_spaceandplayer(t_data *data);
+int replace_player(t_data *data);
+int checkmap(t_data *data);
+
 
 int parseMap(t_data *data)
 {
@@ -26,16 +29,21 @@ int parseMap(t_data *data)
 		printf("Error\n");
 		return (-1);
 	}
-	// printf("start %d  end %d\n", lines.first, lines.second);
+	printf("start %d  end %d\n", lines.first, lines.second);
 	longest_line = find_longest(data->file, lines);
-	// printf("longest %d\n", longest_line);
+	printf("longest %d\n", longest_line);
 	data->map.map_height = lines.second - lines.first + 1;
 	data->map.map_width = longest_line;
+
 	if (find_copy_map(data, lines) == -1) 
 		return (-1);
+	printsplit(data->map.tab);
 	reverse_map(data->map);
+
 	// replace_spaceandplayer(data);
-	 printsplit(data->map.tab);
+	replace_player(data);
+	checkmap(data);
+	printsplit(data->map.tab);
 	// printf("la\n");
 	// on obtient le nb de ligne de la map
 	// on obtient la largeur de la map (la plus grande ligne)
@@ -48,31 +56,32 @@ int parseMap(t_data *data)
 	// on verifie que la map est entouree de 1 (donc chaque 0 
 	return(0);
 }
-void replace_spaceandplayer(t_data *data)
+int replace_player(t_data *data)
 {
 	int i;
 	int j;
+	int err;
 
+	err = 0;
 	i = 0;
 	while (data->map.tab[i])
 	{
 		j = 0;
 		while (data->map.tab[i][j])
 		{
-			if (data->map.tab[i][j] == ' ')
-				data->map.tab[i][j] = '1';
 			if (data->map.tab[i][j] == 'N' || data->map.tab[i][j] == 'S' || data->map.tab[i][j] == 'E' || data->map.tab[i][j] == 'W')
 			{
 				data->player.angle = select_direction(data->map.tab[i][j]);
 				data->map.tab[i][j] = '0';
 				data->player.posx = j + 0.5;
 				data->player.posy = i + 0.5;
-				// printf("posx %f posy %f angle %f\n", data->player.posx, data->player.posy, data->player.angle);
+				err += 1;
 			}
 			j++;
 		}
 		i++;
 	}
+	return err;
 }
 
 double select_direction(char dir)
@@ -100,7 +109,7 @@ int	find_copy_map(t_data *data, t_pair lines)
 		data->map.tab[i] = ft_calloc(data->map.map_width + 1, sizeof(char));
 		if (data->map.tab[i] == NULL)
 			return (-1);
-		ft_strlcpy(data->map.tab[i], data->file[lines.first + i], data->map.map_width);
+		ft_strlcpy(data->map.tab[i], data->file[lines.first + i], data->map.map_width + 1);
 		i++;
 	}
 	return (0);
@@ -167,4 +176,33 @@ void reverse_map(t_map map)
 		end--;
 	}
 	
+}
+
+
+int checkmap(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (data->map.tab[i])
+	{
+		j = 0;
+		while (data->map.tab[i][j])
+		{
+			if (data->map.tab[i][j] == '0' )
+			{
+				if (i == 0 || i == data->map.map_height - 1 || j == 0 || j == data->map.map_width - 1)
+					return (printf("Error\n"));
+				if ((data->map.tab[i + 1][j] != '0' && data->map.tab[i + 1][j] != '1') ||
+					 (data->map.tab[i - 1][j] != '0' && data->map.tab[i - 1][j] != '1') || 
+					 (data->map.tab[i][j + 1] != '0' && data->map.tab[i][j + 1] != '1') || 
+					 (data->map.tab[i][j - 1] != '0' && data->map.tab[i][j - 1] != '1'))
+					return (printf("Error\n"));
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
