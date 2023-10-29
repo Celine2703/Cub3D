@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/10/29 20:11:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/29 20:28:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 #include "readFile.h"
 
 void    ft_putmov(t_player *player, double angle){
-    if (player->angle >= 0 && player->angle <= M_PI/2)
+    if (calcule_dist(map.tab, *player, angle).dist < 0.2)
+    {
+        player->posx = calcule_dist(map.tab, *player, 0).x;
+        player->posy = calcule_dist(map.tab, *player, 0).y;
+    }
+    else if (player->angle >= 0 && player->angle <= M_PI/2)
     {
         player->posx += cos(angle)*0.2;
         player->posy += sin(angle)*0.2;
