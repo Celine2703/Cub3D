@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	printinfo(data);
 	// parseMap(&data);
 	// // printinfo(data);
-	// initmlx (&data);
+	initmlx (&data);
 	ft_destroy_data(&data);
 	return (0);
 }

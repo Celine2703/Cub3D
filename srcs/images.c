@@ -21,13 +21,22 @@ int initmlx(t_data *data)
     data->player.posx = 3;
     data ->player.posy = 3;
     data ->player.angle = 0;
-    data->textures[0].image = mlx_xpm_file_to_image(data->mlx, "./image/textureE.xpm", &taille, &taille);
+    data->textures[0].image = mlx_xpm_file_to_image(data->mlx, data->east, &taille, &taille);
     data->textures[0].addr = mlx_get_data_addr(data->textures[0].image, &data->textures[0].bpp, &data->textures[0].sizeline, &data->textures[0].endian);
+    data->textures[1].image = mlx_xpm_file_to_image(data->mlx, data->west, &taille, &taille);
+    data->textures[1].addr = mlx_get_data_addr(data->textures[1].image, &data->textures[1].bpp, &data->textures[1].sizeline, &data->textures[1].endian);
+    data->textures[2].image = mlx_xpm_file_to_image(data->mlx, data->north, &taille, &taille);
+    data->textures[2].addr = mlx_get_data_addr(data->textures[2].image, &data->textures[2].bpp, &data->textures[2].sizeline, &data->textures[2].endian);
+    data->textures[3].image = mlx_xpm_file_to_image(data->mlx, data->south, &taille, &taille);
+    data->textures[3].addr = mlx_get_data_addr(data->textures[3].image, &data->textures[3].bpp, &data->textures[3].sizeline, &data->textures[3].endian);
     mlx_hook(data->win, 02, 1L << 0, ft_key, data);
     mlx_hook(data->win, 17, 0, ft_destroy_data, data);
     
     // change_image(data);
     mlx_put_image_to_window(data->mlx, data->win, data->textures[0].image, 0, 0);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[1].image, 0, 50);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 100);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 150);
     mlx_loop(data->mlx);
     return 0;
 }
