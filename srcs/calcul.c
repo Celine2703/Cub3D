@@ -6,12 +6,16 @@ t_wallhit calcule_horizontal(char  **map, t_player player)
 {
     t_wallhit wallhit;
 
+    // printf("angle = %f\n", player.angle);
     ft_bzero(&wallhit, sizeof(t_wallhit)); // a mettre avec libft
     if (player.angle > 3*M_PI/2 || player.angle < M_PI/2)
         wallhit.x = ceil(player.posx);
     else
         wallhit.x = floor(player.posx);
     wallhit.y = player.posy + calcule_y(player, wallhit.x);
+    // printf("x = %f\n", wallhit.x);
+    // printf("y = %f\n", wallhit.y);
+    // printf("angle calcule horizontal = %f\n", player.angle);
     while (map[(int)wallhit.y][(int)wallhit.x] != '1')
     {
         if (player.angle > 3*M_PI/2 || player.angle < M_PI/2)
@@ -41,15 +45,17 @@ t_wallhit calcule_vertical (char  **map, t_player player)
     else
         wallhit.y = floor(player.posy);
     wallhit.x = player.posx + calcule_x(player, wallhit.y);
+
     while (map[(int)wallhit.y][(int)wallhit.x] != '1')
     {
         if (player.angle > 0 && player.angle < M_PI)
             wallhit.y++;
         else
             wallhit.y--;
+        printf("wallhit.y in calcul vert = %f\n", wallhit.y);
         wallhit.x = player.posx + calcule_x(player, wallhit.y);
     }
-    if (player.angle < M_PI)
+    if (player.angle > M_PI)
     {
         wallhit.x = player.posx + calcule_x(player, ++wallhit.y);
         wallhit.mur = 'S';
@@ -94,8 +100,7 @@ t_wallhit calcule_dist(char  **map, t_player player, double angle)
 {
     t_wallhit dist_h;
     t_wallhit dist_v;
-    (void) angle;
-    player.angle += angle;
+    player.angle = fmod(player.angle + angle, 2 * M_PI);
     player.cosinus = cos(player.angle);
     player.sinus = sin(player.angle);
     if (player.angle == M_PI/2 || player.angle == 3*M_PI/2)

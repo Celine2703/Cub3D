@@ -1,4 +1,3 @@
-vérifier le nom de l'exécutable
 faire les events
 
 il reste coté affichage
@@ -11,3 +10,5 @@ Coté mlx :
 
 attention si angle devenait négatif?
 vérifier si le joueur est dans un mur
+
+moins d appel a calcule dist pour les events
