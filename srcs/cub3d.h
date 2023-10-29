@@ -40,6 +40,6 @@ void    ft_mapclear(t_map *map);
 void    ft_playerclear(t_player *player);
 void    ft_dataclear(t_data *data);
 void    ft_stop(t_map *map, void *mlx);
-void	ft_destroy(t_data *data);
+void	ft_destroy_data(t_data *data);
 
 #endif

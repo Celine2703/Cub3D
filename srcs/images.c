@@ -18,7 +18,7 @@ int initmlx(t_data *data)
     data->player.posx = 3;
     data ->player.posy = 3;
     data ->player.angle = 0;
-    mlx_key_hook(data->win, ft_key, data);
+    mlx_loop_hook(data->mlx, ft_key, data);
     // change_image(data);
     // mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
     mlx_loop(data->mlx);

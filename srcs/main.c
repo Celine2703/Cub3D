@@ -36,18 +36,21 @@ void	printinfo(t_data data)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+
+	(void)argc;
+	(void)argv;
 	
-	if (init_data(&data, argc, argv))
-		return (0);
-	if (parse_error(&data))
-		return (0);
-	printf("Success\n");
+	// if (init_data(&data, argc, argv))
+	// 	return (0);
+	// if (parse_error(&data))
+	// 	return (0);
+	// printf("Success\n");
 	
-	printinfo(data);
-	parseMap(&data);
 	// printinfo(data);
+	// parseMap(&data);
+	// // printinfo(data);
 	initmlx (&data);
-	destroy_data(&data);
+	// destroy_data(&data);
 	return (0);
 }
 

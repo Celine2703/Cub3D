@@ -22,7 +22,6 @@
 
 // readFile.c
 int		init_data(t_data *data, int argc, char **argv);
-void	destroy_data(t_data *data);
 
 char	**getfile(t_data *data);
 int		checkfilename(char *filename);

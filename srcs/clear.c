@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 08:30:38 by cmartin           #+#    #+#             */
-/*   Updated: 2023/10/27 13:59:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/27 15:20:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,24 @@ void	ft_stop(t_map *map, void *mlx)
 	free(mlx);
 }
 
-void	ft_destroy(t_data *data)
+void	ft_destroy_data(t_data *data)
 {
 	ft_mapclear(&data->map);
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
+	//mlx_destroy_window(data->mlx, data->win);
+	//mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	free(data->east);
+	free(data->west);
+	free(data->north);
+	free(data->south);
+	free(data->file);
+	free(data->filename);
+	int i = 0;
+	while (data->file[i])
+	{
+		free(data->file[i]);
+		i++;
+	}
+	free(data->file);
 	exit(EXIT_SUCCESS);
 }

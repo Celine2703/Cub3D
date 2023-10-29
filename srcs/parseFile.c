@@ -14,6 +14,10 @@
 
 int	whichline(char *line)
 {
+	if (!line || ft_strlen(line) == 0)
+		return (-1);
+	if (ft_strlen(line) == 1)
+		return (7);
 	if (line[0] == 'N' && line[1] == 'O')
 		return (1);
 	if (line[0] == 'S' && line[1] == 'O')
@@ -26,8 +30,6 @@ int	whichline(char *line)
 		return (5);
 	if (line[0] == 'F')
 		return (6);
-	if (ft_strlen(line) == 0)
-		return (7);
 	return (-1);
 }
 
@@ -107,8 +109,8 @@ int	parsefile(t_data *data)
 	nb = 0;
 	while (nb < 7 && data->file[lineread] != NULL)
 	{
-		type = whichline(line);
 		line = deletewhitespace(data->file[lineread]);
+		type = whichline(line);
 		if (type == -1 && nb != 6)
 			return (free(line), lineread + 1);
 		else if (type <= 4 && ++nb && readpath(type, line, data) == -1)

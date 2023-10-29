@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/10/27 14:04:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/29 17:53:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ int ft_mov(t_map map, t_player *player, int key){
 int ft_key(int key, t_data *data)
 {
     if (key == 65307)
-        ft_destroy(data);
+        ft_destroy_data(data);
     ft_mov(data->map, &(data->player), key);
+    printf("posx = %f\n", data->player.posx);
+    printf("posy = %f\n", data->player.posy);
+    printf("angle = %f\n", data->player.angle);
     //ft_display_bis(data->map, data->mlx, &pos);
     return (0);
 }

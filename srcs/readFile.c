@@ -42,8 +42,11 @@ int	getallline(t_data *data)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		line[ft_strlen(line) - 2] = 0;
-		// line[ft_strlen(line) - 2] = 0;
+		size_t len = ft_strlen(line);
+		if (len >= 2)
+			line[len - 2] = 0;
+		else
+			line[0] = 0;
 		data->file[i] = line;
 		i++;
 		line = get_next_line(fd);
