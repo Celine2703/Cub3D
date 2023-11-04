@@ -98,7 +98,7 @@ double calcule_y(t_player player, double x)
         return (0);
     A = fabs(x - player.posx);
     O = (A / player.cosinus) * player.sinus;
-    if (player.angle < M_PI/2 || player.angle > 3*M_PI/2)
+    if (player.angle < M_PI / 2 || player.angle > 3 * M_PI / 2)
         return (O);
     else
         return (-O);
@@ -136,14 +136,14 @@ t_wallhit calcule_dist(char  **map, t_player player, double angle)
         dist_v = calcule_vertical(map, player);
         if (dist_h.dist >= 1000) // to delete
         {
-            printf("t_player.posx = %f\n", player.posx);
-            printf("t_player.posy = %f\n", player.posy);
+            printf("horizontal dist invalide : t_player.posx = %f", player.posx);
+            printf("t_player.posy = %f", player.posy);
             printf("t_player.angle = %f\n", player.angle);
         }
         else
         {
-            printf("t_player.posx = %f\n", player.posx);
-            printf("t_player.posy = %f\n", player.posy);
+            printf("vertical dist invalide :t_player.posx = %f", player.posx);
+            printf("t_player.posy = %f", player.posy);
             printf("t_player.angle = %f\n", player.angle);
         }
         if (dist_h.dist < dist_v.dist)

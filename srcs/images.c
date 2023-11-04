@@ -56,8 +56,8 @@ void change_image(t_data *data)
         distance[x] = calcule_dist(data->map.tab, data->player, PI);
         height = 320.0/distance[x].dist;
         rewriteline(data, x, height);
-        printf("distance[%d] = %f\n", x, distance->dist);
-        printf("height = %f\n", height);
+        // printf("distance[%d] = %f\n", x, distance->dist);
+        // printf("height = %f\n", height);
         x++;
         PI += (4.0*M_PI)/(9.0 * 640.0);
     }
