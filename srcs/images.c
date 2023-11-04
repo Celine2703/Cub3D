@@ -37,10 +37,10 @@ int initmlx(t_data *data)
     mlx_hook(data->win, 17, 0, ft_destroy_data, data);
     
     
-    // mlx_put_image_to_window(data->mlx, data->win, data->textures[0].image, 0, 0);
-    // mlx_put_image_to_window(data->mlx, data->win, data->textures[1].image, 0, 50);
-    // mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 100);
-    // mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 150);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[0].image, 0, 0);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[1].image, 0, 50);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 100);
+    mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 150);
 
     mlx_loop(data->mlx);
     return 0;
@@ -138,8 +138,8 @@ int selectcolor(t_data *data, t_wallhit wall, double step)
     // printf ("texture_coordinate.y = %f\n", texture_coordinate.y);
     // printf (" data->textures[wall.mur].sizeline = %d\n", data->textures[wall.mur].sizeline);
     pixel = data->textures[wall.mur].addr
-		+ (int)texture_coordinate.x * data->textures[wall.mur].sizeline
-		+ (int)texture_coordinate.y * data->textures[wall.mur].bpp / 8;
+		+ (int)texture_coordinate.y * data->textures[wall.mur].sizeline
+		+ (int)texture_coordinate.x * data->textures[wall.mur].bpp / 8;
 	color = *(int *) pixel;
 	return (color);
     
