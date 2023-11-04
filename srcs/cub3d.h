@@ -32,8 +32,8 @@ int			create_base_image(t_color f, t_color ceil, void *mlx, t_data *d);
 
 int			ft_key(int key, t_data *data);
 int			ft_mov(t_map map, t_player *player, int key);
-void		ft_putmov(t_player *player, double angle);
-void    ft_rotation(t_player *player, char c);
+void		ft_putmov(t_map map, t_player *player, double angle);
+void    	ft_rotation(t_player *player, char c);
 
 //clear.c
 void    ft_mapclear(t_map *map);

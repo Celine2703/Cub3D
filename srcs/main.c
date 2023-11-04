@@ -32,6 +32,9 @@ void	printinfo(t_data data)
 	printf("map_height = %d\n", data.map.map_height);
 	printf("map = \n");
 	printsplit(data.map.tab);
+	printf("player.posx = %f\n", data.player.posx);
+	printf("player.posy = %f\n", data.player.posy);
+	printf("player.angle = %f\n", data.player.angle);
 }
 
 int	main(int argc, char **argv)
