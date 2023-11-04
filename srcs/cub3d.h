@@ -42,4 +42,7 @@ void    ft_dataclear(t_data *data);
 void    ft_stop(t_map *map, void *mlx);
 int		ft_destroy_data(t_data *data);
 
+
+void change_image(t_data *data);
+void	rewriteline(t_data *data, int x, double height);
 #endif

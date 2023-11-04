@@ -16,8 +16,11 @@ t_wallhit calcule_horizontal(char  **map, t_player player)
     // printf("x = %f\n", wallhit.x);
     // printf("y = %f\n", wallhit.y);
     // printf("angle calcule horizontal = %f\n", player.angle);
-    printf("x = %f \t y = %f\n", wallhit.x, wallhit.y);
-    printf("map = %c\n", map[(int)wallhit.y][(int)wallhit.x]);
+    if (wallhit.x < 0 || wallhit.y < 0)
+        {
+            wallhit.dist = 999999999;
+            return wallhit;
+        }
     while (map[(int)wallhit.y][(int)wallhit.x] != '1')
     {
         
@@ -26,8 +29,11 @@ t_wallhit calcule_horizontal(char  **map, t_player player)
         else
             wallhit.x--;
         wallhit.y = player.posy + calcule_y(player, wallhit.x);
-        printf("after x = %f \t y = %f\n", wallhit.x, wallhit.y);
-        printf("map = %c\n", map[(int)wallhit.y][(int)wallhit.x]);
+        if (wallhit.x < 0 || wallhit.y < 0)
+        {
+            wallhit.dist = 999999999;
+            return wallhit;
+        }
     }
     {
         if (player.angle > 3*M_PI/2 || player.angle < M_PI/2)
@@ -58,6 +64,11 @@ t_wallhit calcule_vertical (char  **map, t_player player)
         wallhit.y = floor(player.posy);
     wallhit.x = player.posx + calcule_x(player, wallhit.y);
 
+    if (wallhit.x < 0 || wallhit.y < 0)
+        {
+            wallhit.dist = 999999999;
+            return wallhit;
+        }
     while (map[(int)wallhit.y][(int)wallhit.x] != '1' && map[(int)wallhit.y][(int)wallhit.x])
     {
         if (player.angle > 0 && player.angle < M_PI)
@@ -123,6 +134,18 @@ t_wallhit calcule_dist(char  **map, t_player player, double angle)
     {
         dist_h = calcule_horizontal(map, player);
         dist_v = calcule_vertical(map, player);
+        if (dist_h.dist >= 1000) // to delete
+        {
+            printf("t_player.posx = %f\n", player.posx);
+            printf("t_player.posy = %f\n", player.posy);
+            printf("t_player.angle = %f\n", player.angle);
+        }
+        else
+        {
+            printf("t_player.posx = %f\n", player.posx);
+            printf("t_player.posy = %f\n", player.posy);
+            printf("t_player.angle = %f\n", player.angle);
+        }
         if (dist_h.dist < dist_v.dist)
             return (dist_h);
         else

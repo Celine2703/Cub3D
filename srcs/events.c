@@ -16,9 +16,6 @@
 void    ft_putmov(t_map map, t_player *player, double angle){
     player->angle = angle;
     t_wallhit distance = calcule_dist(map.tab, *player, 0);
-    printf ("distance = %f\n", distance.dist);
-    printf("distance.x = %f\n", distance.x);
-    printf("distance.y = %f\n", distance.y);
     if (distance.dist <= 0.21)
     {
         if (distance.x == floor(distance.x))
@@ -60,17 +57,22 @@ int ft_mov(t_map map, t_player *player, int key){
     if(key == 'w')
         ft_putmov(map, player, player->angle);
     else if(key == 'a')
-        ft_putmov(map, player, fmod(player->angle + M_PI/2, 2 * M_PI));
+        ft_putmov(map, player, fmod(player->angle + M_PI / 2, 2 * M_PI));
     else if(key == 's')
         ft_putmov(map, player, fmod(player->angle + M_PI, 2 * M_PI));
     else if(key == 'd')
-        ft_putmov(map, player, fmod(player->angle + 3*M_PI/2, 2 * M_PI));
-    player->angle = prevangle;
-    if(key == 65361)
-        ft_rotation(player, 'g');
-    else if(key == 65363)
-        ft_rotation(player, 'd');
-    return (0);
+        ft_putmov(map, player, fmod(player->angle + 3 * M_PI/2, 2 * M_PI));
+    else if (key == 65361 || key == 65363)
+    {
+        player->angle = prevangle;
+        if(key == 65361)
+            ft_rotation(player, 'g');
+        else if(key == 65363)
+            ft_rotation(player, 'd');
+    }
+    else
+        return (0);
+    return (1);
 }
 
 int ft_key(int key, t_data *data)
@@ -79,10 +81,8 @@ int ft_key(int key, t_data *data)
         ft_destroy_data(data);
     if (data -> player.angle == 2 * M_PI)
         data -> player.angle = 0;
-    ft_mov(data->map, &(data->player), key);
-    printf("posx = %f\n", data->player.posx);
-    printf("posy = %f\n", data->player.posy);
-    printf("angle ft key = %f\n", data->player.angle);
+    if (ft_mov(data->map, &(data->player), key))
+       change_image(data);
     //ft_display_bis(data->map, data->mlx, &pos);
     return (0);
 }

@@ -2,9 +2,6 @@
 #include "../minilibx-linux/mlx.h"
 #include "readFile.h"
 
-void change_image(t_data *data);
-void	rewriteline(t_data *data, int x, int height);
-
 
 int initmlx(t_data *data)
 {
@@ -60,40 +57,37 @@ void change_image(t_data *data)
         height = 320.0/distance[x].dist;
         rewriteline(data, x, height);
         printf("distance[%d] = %f\n", x, distance->dist);
+        printf("height = %f\n", height);
         x++;
         PI += (4.0*M_PI)/(9.0 * 640.0);
     }
-    (void )distance;
+    mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
     
     // on commence par calculer la distance du mur pour chaque colonne
     // ensuite double boucle ou on parcours toute l'image pour mettre le pixel correspondant
 }
 
-void	rewriteline(t_data *data, int x, int height)
+void	rewriteline(t_data *data, int x, double height)
 {
     int		y;
     char	*pixel;
 
     y = 0;
     // printf ("pointer = %p\n", data->base.addr);
-    while (y < height)
-    {
-        pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
-        *(int *)pixel = data->ceiling.color;
-        y++;
-    }
-    while (y< 640 - height)
-    {
-        pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
-        *(int *)pixel = 0x000000;
-        y++;
-    }
+    printf ("height = %f\n", height);
     while (y < 640)
-    {
-        pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
-        *(int *)pixel = data->floor.color;
-        y++;
-    }
+	{
+		pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
+		if (y > (640 / 2.0 + height))
+			*(int *) pixel = data->ceiling.color;
+		else if (y < (640 / 2.0 - height))
+			*(int *) pixel = data->floor.color;
+		else
+		{
+			*(int *) pixel = 0x00000000;
+		}
+		y++;
+	}
 }
 
 // int main(){
