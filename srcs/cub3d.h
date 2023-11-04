@@ -44,5 +44,5 @@ int		ft_destroy_data(t_data *data);
 
 
 void change_image(t_data *data);
-void	rewriteline(t_data *data, int x, double height);
+void	rewriteline(t_data *data, int x, double height,t_wallhit wall);
 #endif

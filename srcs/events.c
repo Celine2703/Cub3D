@@ -83,6 +83,9 @@ int ft_key(int key, t_data *data)
         data -> player.angle = 0;
     if (ft_mov(data->map, &(data->player), key))
        change_image(data);
+    printf("angle = %f\n", data->player.angle);
+    printf("posx = %f\n", data->player.posx);
+    printf("posy = %f\n", data->player.posy);
     //ft_display_bis(data->map, data->mlx, &pos);
     return (0);
 }
