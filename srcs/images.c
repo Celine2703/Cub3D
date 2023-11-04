@@ -25,9 +25,9 @@ int initmlx(t_data *data)
     data->textures[2].addr = mlx_get_data_addr(data->textures[2].image, &data->textures[2].bpp, &data->textures[2].sizeline, &data->textures[2].endian);
     data->textures[3].image = mlx_xpm_file_to_image(data->mlx, data->south, &taille, &taille);
     data->textures[3].addr = mlx_get_data_addr(data->textures[3].image, &data->textures[3].bpp, &data->textures[3].sizeline, &data->textures[3].endian);
-    printf("angle in image = %f\n", data->player.angle);
-    printf("dist.x : %f\n", calcule_dist(data->map.tab, data->player,0).x);
-    printf("dist.y : %f\n", calcule_dist(data->map.tab, data->player,0).y);
+    // printf("angle in image = %f\n", data->player.angle);
+    // printf("dist.x : %f\n", calcule_dist(data->map.tab, data->player,0).x);
+    // printf("dist.y : %f\n", calcule_dist(data->map.tab, data->player,0).y);
     change_image(data);
     mlx_hook(data->win, 02, 1L << 0, ft_key, data);
     mlx_hook(data->win, 17, 0, ft_destroy_data, data);
@@ -53,7 +53,7 @@ void change_image(t_data *data)
     while (x < 640)
     {
         // printf ("PI = %f", PI);
-        distance[x] = calcule_dist(data->map.tab, data->player, PI);
+        distance[x] = calcule_dist(data->map, data->player, PI);
         height = 320.0/distance[x].dist;
         rewriteline(data, x, height);
         // printf("distance[%d] = %f\n", x, distance->dist);

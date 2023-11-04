@@ -15,7 +15,7 @@
 
 void    ft_putmov(t_map map, t_player *player, double angle){
     player->angle = angle;
-    t_wallhit distance = calcule_dist(map.tab, *player, 0);
+    t_wallhit distance = calcule_dist(map, *player, 0);
     if (distance.dist <= 0.21)
     {
         if (distance.x == floor(distance.x))

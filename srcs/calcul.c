@@ -2,7 +2,7 @@
 #include "structs.h"
 #include "../Libft/libft.h"
 
-t_wallhit calcule_horizontal(char  **map, t_player player)
+t_wallhit calcule_horizontal(t_map map, t_player player)
 {
     t_wallhit wallhit;
 
@@ -16,12 +16,13 @@ t_wallhit calcule_horizontal(char  **map, t_player player)
     // printf("x = %f\n", wallhit.x);
     // printf("y = %f\n", wallhit.y);
     // printf("angle calcule horizontal = %f\n", player.angle);
-    if (wallhit.x < 0 || wallhit.y < 0)
-        {
+    if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_height || wallhit.y > map.map_width)
+    {
             wallhit.dist = 999999999;
             return wallhit;
-        }
-    while (map[(int)wallhit.y][(int)wallhit.x] != '1')
+    }
+
+    while (map.tab[(int)wallhit.y][(int)wallhit.x] != '1')
     {
         
         if (player.angle > 3*M_PI/2 || player.angle < M_PI/2)
@@ -29,7 +30,7 @@ t_wallhit calcule_horizontal(char  **map, t_player player)
         else
             wallhit.x--;
         wallhit.y = player.posy + calcule_y(player, wallhit.x);
-        if (wallhit.x < 0 || wallhit.y < 0)
+        if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_height || wallhit.y > map.map_width)
         {
             wallhit.dist = 999999999;
             return wallhit;
@@ -53,7 +54,7 @@ t_wallhit calcule_horizontal(char  **map, t_player player)
     return (wallhit);
 }
 
-t_wallhit calcule_vertical (char  **map, t_player player)
+t_wallhit calcule_vertical(t_map  map, t_player player)
 {
     t_wallhit wallhit;
 
@@ -64,12 +65,12 @@ t_wallhit calcule_vertical (char  **map, t_player player)
         wallhit.y = floor(player.posy);
     wallhit.x = player.posx + calcule_x(player, wallhit.y);
 
-    if (wallhit.x < 0 || wallhit.y < 0)
+    if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_height || wallhit.y > map.map_width)
         {
             wallhit.dist = 999999999;
             return wallhit;
         }
-    while (map[(int)wallhit.y][(int)wallhit.x] != '1' && map[(int)wallhit.y][(int)wallhit.x])
+    while (map.tab[(int)wallhit.y][(int)wallhit.x] != '1' && map.tab[(int)wallhit.y][(int)wallhit.x])
     {
         if (player.angle > 0 && player.angle < M_PI)
             wallhit.y++;
@@ -77,6 +78,11 @@ t_wallhit calcule_vertical (char  **map, t_player player)
             wallhit.y--;
         // printf("wallhit.y in calcul vert = %f\n", wallhit.y);
         wallhit.x = player.posx + calcule_x(player, wallhit.y);
+        if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_height || wallhit.y > map.map_width)
+        {
+            wallhit.dist = 999999999;
+            return wallhit;
+        }
     }
     if (player.angle > M_PI)
     {
@@ -119,7 +125,7 @@ double calcule_x(t_player player, double y)
         return (-O);
 }
 
-t_wallhit calcule_dist(char  **map, t_player player, double angle)
+t_wallhit calcule_dist(t_map map, t_player player, double angle)
 {
     t_wallhit dist_h;
     t_wallhit dist_v;
@@ -143,21 +149,21 @@ t_wallhit calcule_dist(char  **map, t_player player, double angle)
              printf("vertical wallhit.x = %f", dist_v.x);
             printf(" vertical wallhit.y = %f\n", dist_v.y);
         }
-        else if (dist_h.dist >= 1000) // to delete
-        {
-            printf("horizontal dist invalide :");
-            printf(" t_player.angle = %f\n", player.angle);
-            printf(" wallhit.x = %f", dist_h.x);
-            printf(" wallhit.y = %f\n", dist_h.y);
-        }
-        else if (dist_v.dist >= 1000)
-        {
-            printf("vertical dist invalide :");
-            printf("t_player.angle = %f\n", player.angle);
-            printf(" wallhit.x = %f", dist_v.x);
-            printf(" wallhit.y = %f\n", dist_v.y);
+        // else if (dist_h.dist >= 1000) // to delete
+        // {
+        //     printf("horizontal dist invalide :");
+        //     printf(" t_player.angle = %f\n", player.angle);
+        //     printf(" wallhit.x = %f", dist_h.x);
+        //     printf(" wallhit.y = %f\n", dist_h.y);
+        // }
+        // else if (dist_v.dist >= 1000)
+        // {
+        //     printf("vertical dist invalide :");
+        //     printf("t_player.angle = %f\n", player.angle);
+        //     printf(" wallhit.x = %f", dist_v.x);
+        //     printf(" wallhit.y = %f\n", dist_v.y);
 
-        }
+        // }
 
         if (dist_h.dist < dist_v.dist)
             return (dist_h);
