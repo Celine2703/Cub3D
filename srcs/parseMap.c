@@ -17,6 +17,7 @@ double select_direction(char dir);
 // void replace_spaceandplayer(t_data *data);
 int replace_player(t_data *data);
 int checkmap(t_data *data);
+void replacespace(t_data *data);
 
 
 int parseMap(t_data *data)
@@ -40,10 +41,11 @@ int parseMap(t_data *data)
 	printsplit(data->map.tab);
 	reverse_map(data->map);
 
-	// replace_spaceandplayer(data);
 	replace_player(data);
 	checkmap(data);
+	replacespace(data);
 	printsplit(data->map.tab);
+
 	// printf("la\n");
 	// on obtient le nb de ligne de la map
 	// on obtient la largeur de la map (la plus grande ligne)
@@ -205,4 +207,23 @@ int checkmap(t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+void replacespace(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (data->map.tab[i])
+	{
+		j = 0;
+		while (data->map.tab[i][j])
+		{
+			if (data->map.tab[i][j] == ' ')
+				data->map.tab[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
 }

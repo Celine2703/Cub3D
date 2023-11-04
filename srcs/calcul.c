@@ -134,14 +134,23 @@ t_wallhit calcule_dist(char  **map, t_player player, double angle)
     {
         dist_h = calcule_horizontal(map, player);
         dist_v = calcule_vertical(map, player);
-        if (dist_h.dist >= 1000) // to delete
+        if (dist_h.dist >= 1000 && dist_v.dist >= 1000) // to delete
+        {
+            printf("BOTH dist invalide :");
+            printf(" t_player.angle = %f\n", player.angle);
+            printf(" horizontal wallhit.x = %f", dist_h.x);
+            printf(" horizontal wallhit.y = %f\n", dist_h.y);
+             printf("vertical wallhit.x = %f", dist_v.x);
+            printf(" vertical wallhit.y = %f\n", dist_v.y);
+        }
+        else if (dist_h.dist >= 1000) // to delete
         {
             printf("horizontal dist invalide :");
             printf(" t_player.angle = %f\n", player.angle);
             printf(" wallhit.x = %f", dist_h.x);
             printf(" wallhit.y = %f\n", dist_h.y);
         }
-        else
+        else if (dist_v.dist >= 1000)
         {
             printf("vertical dist invalide :");
             printf("t_player.angle = %f\n", player.angle);
@@ -149,6 +158,7 @@ t_wallhit calcule_dist(char  **map, t_player player, double angle)
             printf(" wallhit.y = %f\n", dist_v.y);
 
         }
+
         if (dist_h.dist < dist_v.dist)
             return (dist_h);
         else
