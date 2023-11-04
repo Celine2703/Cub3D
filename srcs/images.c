@@ -3,6 +3,8 @@
 #include "readFile.h"
 
 void change_image(t_data *data);
+void	rewriteline(t_data *data, int x, int height);
+
 
 int initmlx(t_data *data)
 {
@@ -15,7 +17,7 @@ int initmlx(t_data *data)
     data->win = mlx_new_window(data->mlx, 640, 640, "CUB1D");
     if (data->win == NULL)
         return 1;
-    // create_base_image (data->floor, data->ceiling, data->mlx, data);
+    create_base_image (data->floor, data->ceiling, data->mlx, data);
     // // change_image(data)
     // // calcule_dist(data->map.tab, data->player, 0);
     data->textures[0].image = mlx_xpm_file_to_image(data->mlx, data->east, &taille, &taille);
@@ -29,14 +31,16 @@ int initmlx(t_data *data)
     printf("angle in image = %f\n", data->player.angle);
     printf("dist.x : %f\n", calcule_dist(data->map.tab, data->player,0).x);
     printf("dist.y : %f\n", calcule_dist(data->map.tab, data->player,0).y);
-    // mlx_hook(data->win, 02, 1L << 0, ft_key, data);
-    // mlx_hook(data->win, 17, 0, ft_destroy_data, data);
+    change_image(data);
+    mlx_hook(data->win, 02, 1L << 0, ft_key, data);
+    mlx_hook(data->win, 17, 0, ft_destroy_data, data);
     
-    // change_image(data);
-    mlx_put_image_to_window(data->mlx, data->win, data->textures[0].image, 0, 0);
-    mlx_put_image_to_window(data->mlx, data->win, data->textures[1].image, 0, 50);
-    mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 100);
-    mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 150);
+    
+    // mlx_put_image_to_window(data->mlx, data->win, data->textures[0].image, 0, 0);
+    // mlx_put_image_to_window(data->mlx, data->win, data->textures[1].image, 0, 50);
+    // mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 100);
+    // mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 150);
+
     mlx_loop(data->mlx);
     return 0;
 }
@@ -44,14 +48,17 @@ int initmlx(t_data *data)
 void change_image(t_data *data)
 {
     t_wallhit distance[640];
+    double height;
     int x = 0;
-    double PI = -(2.0*M_PI)/9.0;
+    double PI = -(2.0 * M_PI)/9.0;
 
     // printf("map : %c\n" ,data->map.tab[0][0]);
     while (x < 640)
     {
         // printf ("PI = %f", PI);
         distance[x] = calcule_dist(data->map.tab, data->player, PI);
+        height = 320.0/distance[x].dist;
+        rewriteline(data, x, height);
         printf("distance[%d] = %f\n", x, distance->dist);
         x++;
         PI += (4.0*M_PI)/(9.0 * 640.0);
@@ -61,6 +68,34 @@ void change_image(t_data *data)
     // on commence par calculer la distance du mur pour chaque colonne
     // ensuite double boucle ou on parcours toute l'image pour mettre le pixel correspondant
 }
+
+void	rewriteline(t_data *data, int x, int height)
+{
+    int		y;
+    char	*pixel;
+
+    y = 0;
+    // printf ("pointer = %p\n", data->base.addr);
+    while (y < height)
+    {
+        pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
+        *(int *)pixel = data->ceiling.color;
+        y++;
+    }
+    while (y< 640 - height)
+    {
+        pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
+        *(int *)pixel = 0x000000;
+        y++;
+    }
+    while (y < 640)
+    {
+        pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
+        *(int *)pixel = data->floor.color;
+        y++;
+    }
+}
+
 // int main(){
 //     void *mlx;
 //     void *win;
