@@ -35,6 +35,8 @@ int parseMap(t_data *data)
 	printf("longest %d\n", longest_line);
 	data->map.map_height = lines.second - lines.first + 1;
 	data->map.map_width = longest_line;
+	printf("height %d\n", data->map.map_height);
+	printf("width %d\n", data->map.map_width);
 
 	if (find_copy_map(data, lines) == -1) 
 		return (-1);

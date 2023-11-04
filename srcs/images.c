@@ -28,7 +28,7 @@ int initmlx(t_data *data)
     // printf("angle in image = %f\n", data->player.angle);
     // printf("dist.x : %f\n", calcule_dist(data->map.tab, data->player,0).x);
     // printf("dist.y : %f\n", calcule_dist(data->map.tab, data->player,0).y);
-    change_image(data);
+    // change_image(data);
     mlx_hook(data->win, 02, 1L << 0, ft_key, data);
     mlx_hook(data->win, 17, 0, ft_destroy_data, data);
     
