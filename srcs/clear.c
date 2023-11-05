@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "readFile.h"
 
 void	ft_mapclear(t_map *map)
 {
@@ -35,25 +36,39 @@ void	ft_stop(t_map *map, void *mlx)
 	// mlx_destroy_display(mlx);
 	free(mlx);
 }
+void checkfree (void *ptr)
+{
+	if (ptr)
+		free(ptr);
+}
 
 int	ft_destroy_data(t_data *data)
 {
-	ft_mapclear(&data->map);
-	//mlx_destroy_window(data->mlx, data->win);
-	//mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	free(data->east);
-	free(data->west);
-	free(data->north);
-	free(data->south);
-	// free(data->file);
+	if (data->file)
+		freesplit(data->file);
+	// checkfree(data->image.image);
+	// checkfree(data->img.addr);
+	
+	if (data->map.tab)
+		ft_mapclear(&data->map);
+	checkfree(data->north);
+	checkfree(data->south);
+	checkfree(data->east);
+	checkfree(data->west);
+
+	if (data->base.image)
+		mlx_destroy_image(data->mlx, data->base.image);
 	int i = 0;
-	while (data->file[i])
+	while (i < 4)
 	{
-		free(data->file[i]);
-		i++;
+		if (data->textures[i].image)
+			mlx_destroy_image(data->mlx, data->textures[i++].image);
 	}
-	free(data->file);
-	exit(EXIT_SUCCESS);
-	return (0);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	checkfree(data->mlx);
+	ft_bzero(data, sizeof(t_data));
+	exit(0);
 }
