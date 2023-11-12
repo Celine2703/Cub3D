@@ -30,7 +30,10 @@ void printrevsplit(char **split)
 	}
 	while (i>=0)
 	{
-		printf("%d : %s\n", i, split[i]);
+		if (split[i] != NULL)
+			printf("%d : %s\n", i, split[i]);
+		else 
+			printf("%d : 0123456789\n", i);
 		i--;
 	}
 }
@@ -52,16 +55,21 @@ int parseMap(t_data *data)
 	printf("height %d\n", data->map.map_height);
 	printf("width %d\n", data->map.map_width);
 
-	if (find_copy_map(data, lines) == -1) 
+	if (find_copy_map(data, lines) == -1)
+	{ 
+		printf("GORRRRRRRRRRRRRRRRRRRRRRRRRRR Error\n");
 		return (-1);
+	
+	}// printsplit(data->map.tab);
+	reverse_map(data->map);
+	printf("LAAAAAAAAAAAAAAAAAA\n");
 	printsplit(data->map.tab);
-	// reverse_map(data->map);
-
+	printrevsplit(data->map.tab);
 	replace_player(data);
 	checkmap(data);
 	replacespace(data);
-	printsplit(data->map.tab);
-	printrevsplit(data->map.tab);
+	// printsplit(data->map.tab);
+	// printrevsplit(data->map.tab);
 
 	// printf("la\n");
 	// on obtient le nb de ligne de la map

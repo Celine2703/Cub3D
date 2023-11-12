@@ -6,6 +6,13 @@
 int selectcolor(t_data *data, t_wallhit wall, double step);
 t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step);
 
+void printwallhit(t_wallhit wh)
+{
+    printf("wallhit.x = %f\n", wh.x);
+    printf("wallhit.y = %f\n", wh.y);
+    printf("wallhit.dist = %f\n", wh.dist);
+    printf("wallhit.mur = %c\n", wh.mur);
+}
 
 int initmlx(t_data *data)
 {
@@ -43,15 +50,20 @@ int initmlx(t_data *data)
     // mlx_put_image_to_window(data->mlx, data->win, data->textures[1].image, 0, 64);
     // mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 128);
     // // mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 192);
-    t_player player;
-    player.posx = 6.5;
-    player.posy = 1.01;
-
-    player.angle = 0.00000;
-    data->player= player;
+    // t_player player;
+    // player.posx = 6.5;
+    // player.posy = 1.01;
+    data->player.angle = 3.1651;
+    data->player.posx = 1.7935;
+    data->player.posy = 1.018;
+    // player.angle = 0.00000;
+    // data->player= player;
     // calcule_vertical(data->map, data->player);
     // // t_wallhit distance = calcule_dist(data->map, player, M_PI/30);
     // printf ("calculdist = %f\n", distance.dist);
+    printrevsplit(data->map.tab);
+    t_wallhit distanceeast = calcule_dist(data->map, data->player,0);
+    printwallhit(distanceeast);
     change_image(data);
     mlx_loop(data->mlx);
     return 0;
@@ -62,7 +74,7 @@ void change_image(t_data *data)
     t_wallhit distance[640];
     double height;
     int x = 0;
-    double PI = -(2.0 * M_PI)/9.0;
+    double PI = (2.0 * M_PI)/9.0;
 
     // printf("map : %c\n" ,data->map.tab[0][0]);
     while (x < 640)
@@ -74,8 +86,9 @@ void change_image(t_data *data)
         rewriteline(data, x, height,distance[x]);
         // printf("distance[%d] = %f\n", x, distance->dist);
         // printf("height = %f\n", height);
+        // printf("angle : %f\n", PI);
         x++;
-        PI += (4.0*M_PI)/(9.0 * 640.0);
+        PI -= (4.0*M_PI)/(9.0 * 640.0);
     }
     mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
     

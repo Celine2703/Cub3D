@@ -19,11 +19,21 @@ void    ft_putmov(t_map map, t_player *player, double angle){
     if (distance.dist <= 0.21)
     {
         if (distance.x == floor(distance.x))
-            player->posx = distance.x - 0.01;
+        {
+            if (distance.x > player->posx)
+                player->posx = distance.x - 0.01;
+            else if (distance.x < player->posx)
+                player->posx = distance.x + 0.01;
+        }
         else
             player->posx = distance.x;
         if ( distance.y == floor(distance.y))
-            player->posy = distance.y - 0.01;
+        {
+            if (distance.y > player->posy)
+                player->posy = distance.y - 0.01;
+            else if (distance.y < player->posy)
+                player->posy = distance.y + 0.01;
+        }
         else
             player->posy = distance.y;
     }
@@ -68,9 +78,9 @@ int ft_mov(t_map map, t_player *player, int key){
     {
         player->angle = prevangle;
         if(key == 65361)
-            ft_rotation(player, 'd');
-        else if(key == 65363)
             ft_rotation(player, 'g');
+        else if(key == 65363)
+            ft_rotation(player, 'd');
         prevangle = player->angle;
     }
     else
