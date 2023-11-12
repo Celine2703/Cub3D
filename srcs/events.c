@@ -38,22 +38,18 @@ void    ft_rotation(t_player *player, char c)
 {
     double rotation;
 
-    rotation = M_PI/30;
+    rotation = M_PI / 30;
+    if (player->angle >= 2 * M_PI)
+        player->angle = 0;
     if (c == 'd')
     {
         if (player->angle - rotation < 0)
-            player->angle += 2*M_PI - rotation;// ajout de +=
+            player->angle = 2*M_PI - (rotation - player->angle);
         else
             player->angle -= rotation;
     }
     else if (c == 'g')
-    {
-        if (player->angle + rotation > 2*M_PI)
-            player->angle -= 2*M_PI + rotation;
-        else
-            player->angle += rotation;
-        // player->angle += rotation;
-    }
+        player->angle += rotation;
 }
 
 int ft_mov(t_map map, t_player *player, int key){

@@ -19,7 +19,21 @@ int replace_player(t_data *data);
 int checkmap(t_data *data);
 void replacespace(t_data *data);
 
+void printrevsplit(char **split)
+{
+	int	i;
 
+	i = 0;
+	while (split[i] != NULL)
+	{
+		i++;
+	}
+	while (i>=0)
+	{
+		printf("%d : %s\n", i, split[i]);
+		i--;
+	}
+}
 int parseMap(t_data *data)
 {
 	t_pair lines;
@@ -41,12 +55,13 @@ int parseMap(t_data *data)
 	if (find_copy_map(data, lines) == -1) 
 		return (-1);
 	printsplit(data->map.tab);
-	reverse_map(data->map);
+	// reverse_map(data->map);
 
 	replace_player(data);
 	checkmap(data);
 	replacespace(data);
 	printsplit(data->map.tab);
+	printrevsplit(data->map.tab);
 
 	// printf("la\n");
 	// on obtient le nb de ligne de la map
@@ -171,7 +186,7 @@ void reverse_map(t_map map)
 	start = 0;
 	end = map.map_height - 1;
 
-	while (start < end)
+	while (start <= end)
 	{
 		tmp = map.tab[start];
 		map.tab[start] = map.tab[end];
@@ -220,9 +235,9 @@ void replacespace(t_data *data)
 	while (data->map.tab[i])
 	{
 		j = 0;
-		while (data->map.tab[i][j])
+		while ( j < data->map.map_width)
 		{
-			if (data->map.tab[i][j] == ' ')
+			if (data->map.tab[i][j] == ' ' || data->map.tab[i][j] == 0)
 				data->map.tab[i][j] = '1';
 			j++;
 		}

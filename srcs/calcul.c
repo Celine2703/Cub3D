@@ -65,12 +65,12 @@ t_wallhit calcule_vertical(t_map  map, t_player player)
         wallhit.y = floor(player.posy);
     wallhit.x = player.posx + calcule_x(player, wallhit.y);
 
-    if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_width || wallhit.y > map.map_height)
+    if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x >= map.map_width || wallhit.y >= map.map_height)
         {
             wallhit.dist = 999999999;
             return wallhit;
         }
-    while (map.tab[(int)wallhit.y][(int)wallhit.x] != '1' && map.tab[(int)wallhit.y][(int)wallhit.x])
+    while (map.tab[(int)wallhit.y][(int)wallhit.x] != '1' )
     {
         if (player.angle > 0 && player.angle < M_PI)
             wallhit.y++;
@@ -129,7 +129,12 @@ t_wallhit calcule_dist(t_map map, t_player player, double angle)
 {
     t_wallhit dist_h;
     t_wallhit dist_v;
-    player.angle = fmod(player.angle + angle, 2 * M_PI);
+    if (angle + player.angle > 2 * M_PI)
+        player.angle = fmod(player.angle + angle, 2 * M_PI) - 2 * M_PI;
+    else if (angle + player.angle < 0)
+        player.angle = 2 * M_PI + fmod(player.angle + angle, 2 * M_PI);
+    else
+        player.angle = fmod(player.angle + angle, 2 * M_PI);
     player.cosinus = cos(player.angle);
     player.sinus = sin(player.angle);
     if (player.angle == M_PI/2 || player.angle == 3*M_PI/2)
