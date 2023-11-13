@@ -37,6 +37,8 @@ void printrevsplit(char **split)
 		i--;
 	}
 }
+
+
 int parseMap(t_data *data)
 {
 	t_pair lines;

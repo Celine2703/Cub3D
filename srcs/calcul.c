@@ -73,12 +73,13 @@ t_wallhit calcule_vertical(t_map  map, t_player player)
     //         return wallhit;
     //     }
     while (!(wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_width || wallhit.y > map.map_height) && map.tab[(int)wallhit.y][(int)wallhit.x] != '1' )
-    {
+    {        
         if (player.angle > 0 && player.angle < M_PI)
             wallhit.y++;
         else
             wallhit.y--;
         // printf("wallhit.y in calcul vert = %f\n", wallhit.y);
+        if ()
         wallhit.x = player.posx + calcule_x(player, wallhit.y);
         // if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_width || wallhit.y > map.map_height)
         // { 
