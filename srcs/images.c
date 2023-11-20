@@ -122,13 +122,7 @@ void change_image(t_data *data)
     {
         // printf ("PI = %f", PI);
         distance[x] = calcule_dist(data->map, data->player, PI);
-        if (distance[x].mur != 'E')
-        {
-            printf("BUG : distance[%d].wallhit = %c\n", x, distance[x].mur);
-            printf("BUG : distance[%d].x = %f\n", x, distance[x].x);
-            printf("BUG : distance[%d].y = %f\n", x, distance[x].y);
-            printf("BUG : distance[%d].dist = %f\n", x, distance[x].dist);
-        }
+        
         distance[x].dist = distance[x].dist * cosl(PI);
         height = 320.0/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
