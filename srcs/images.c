@@ -77,21 +77,34 @@ int initmlx(t_data *data)
     // mlx_put_image_to_window(data->mlx, data->win, data->textures[2].image, 0, 128);
     // // mlx_put_image_to_window(data->mlx, data->win, data->textures[3].image, 0, 192);
     // t_player player;
-    // player.posx = 6.5;
-    // player.posy = 1.01;
+    // t_wallhit distance;
+    // distance.x = 2;
+    // distance.y = 6.941;
+    // distance.dist = 5.941;
+    // distance.mur = 'O';
+
+    // (void)distance;
+    // selectcolor(data, distance, 0.5441461);
     // data->player.angle =  1.63;
     // data->player.posx = 38.5;
     // data->player.posy = 13.5;
 
+    // data->player.angle =  4.712389;
+    // data->player.posx = 26.5;
+    // data->player.posy = 1.9;
+    // t_wallhit distance;
+    // distance = calcule_dist(data->map, data->player, 0);
+    // distance.dist = 320/distance.dist ;
+    // rewriteline(data, 320, distance.dist, distance);
     // player.angle = 0.00000;
     // data->player= player;
     // calcule_vertical(data->map, data->player);
     // // t_wallhit distance = calcule_dist(data->map, player, M_PI/30);
     // printf ("calculdist = %f\n", distance.dist);
-    printmappos(*data);
+    // printmappos(*data);
     // printrevsplit(data->map.tab);
-    t_wallhit distanceeast = calcule_dist(data->map, data->player,0);
-    printwallhit(distanceeast);
+    // t_wallhit distanceeast = calcule_dist(data->map, data->player,0);
+    // printwallhit(distanceeast);
     change_image(data);
     mlx_loop(data->mlx);
     return 0;
@@ -102,14 +115,14 @@ void change_image(t_data *data)
     t_wallhit distance[640];
     double height;
     int x = 0;
-    double PI = (2.0 * M_PI)/9.0;
+    long double PI = (2.0 * M_PI)/9.0;
 
     // printf("map : %c\n" ,data->map.tab[0][0]);
     while (x < 640)
     {
         // printf ("PI = %f", PI);
         distance[x] = calcule_dist(data->map, data->player, PI);
-        distance[x].dist = distance[x].dist * cos(PI);
+        distance[x].dist = distance[x].dist * cosl(PI);
         height = 320.0/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
         // printf("distance[%d] = %f\n", x, distance->dist);
@@ -132,11 +145,17 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
     (void) test;
     y = 0;
     // printf ("pointer = %p\n", data->base.addr);
-    // printf ("height = %f\n", height);
+
+     if (test > 320)
+     {
+        test = (test - 320) /2;
+        create_texture_coord(0, wall, (test*320)/64);
+     }
     // while (test > 320)
 	// {
 	// 	create_texture_coord(data, wall, 64.0 / (height * 2.0));
 	// 	test -= 64.0 / (height * 2.0);
+    //     // printf("test = %f\n", test);
 	// }
     while (y < 640)
 	{
@@ -147,7 +166,7 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
 			*(int *) pixel = data->floor.color;
 		else
 		{
-			*(int *) pixel = selectcolor(data, wall, 64.0/(height*2.0));
+			*(int *) pixel = selectcolor(data, wall, 64.0/(height * 2.0));
             // *(int *) pixel = 0x00FF0000;
 		}
 		y++;
@@ -160,27 +179,23 @@ t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
 {
     t_wallhit texture_coordinate;
     static double	y;
-
+    
     if (!data)
 	{
 		y = step;
 		return (wall);
 	}
-    if (wall.mur == 'S' || wall.mur == 'N')
+   
+    if (wall.mur == 'O' || wall.mur == 'E')
 	{
 		texture_coordinate.y = (wall.y - (int)wall.y) * 64.0;
 	}
 	else
 	{
-		texture_coordinate.y = (wall.x - (int)wall.x) * 64;
+		texture_coordinate.y = (wall.x - (int)wall.x) * 64.0;
 	}
 	texture_coordinate.x = floor(y);
-    // if (texture_coordinate.x > 63 || texture_coordinate.y > 63)
-    {
-        // printf("texture_coordinate.x = %f\n", texture_coordinate.x);
-        // printf("texture_coordinate.y = %f\n", texture_coordinate.y);
-        // printf("step = %f\n", step);
-    }
+   
     y+= step;
     return (texture_coordinate);
 }
@@ -191,20 +206,28 @@ int selectcolor(t_data *data, t_wallhit wall, double step)
     char *pixel;
     t_wallhit texture_coordinate;
     (void)pixel;
+    // printf ("wall.x = %f\n", wall.x);
+    // printf ("wall.y = %f\n", wall.y);
+    // printf ("wall.dist = %f\n", wall.dist);
+    // printf ("wall.mur = %c\n", wall.mur);
+    // printf("data = %p\n", data);
     texture_coordinate = create_texture_coord(data, wall, step);
-      
+    // printf ("step = %f\n", step);
     if (wall.mur == 'E')
         wall.mur = 0;
-    else if (wall.mur == 'W')
+    else if (wall.mur == 'O')
         wall.mur = 1;
     else if (wall.mur == 'N')
         wall.mur = 2;
     else if (wall.mur == 'S')
         wall.mur = 3;
+    // printf("data->textures[%d].addr = %p\n",wall.mur, data->textures[wall.mur].addr);
     pixel = data->textures[wall.mur].addr
 		+ (int)texture_coordinate.x * data->textures[wall.mur].sizeline
 		+ (int)texture_coordinate.y * data->textures[wall.mur].bpp / 8;
-	color = 0x00000000;
+    // printf("pixel = %p\n", pixel);
+    
+	color = *(int*)pixel;
 	return (color);
     
 }
