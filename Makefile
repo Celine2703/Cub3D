@@ -18,7 +18,7 @@ LIBFT		=	./Libft/libft.a
 
 MAIN		=	main.c
 
-CORE		=	images.c calcul.c events.c clear.c
+CORE		=	images.c calculbis.c events.c clear.c
 
 PARSING		=	splitUtils.c readFile.c parseUtils.c parseMap.c parseFile.c errors_utils.c
 

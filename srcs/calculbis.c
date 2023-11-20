@@ -44,9 +44,7 @@ t_wallhit calcule_horizontal(t_map map, t_player player, char c)
 
     wallhit.y = player.posy + calcule_y(player, wallhit.x);
 
-    printf("x = %f, y = %f\n", wallhit.x, wallhit.y);
-    printf("map.tab[%d][%d] = %c\n", (int)wallhit.y, (int)wallhit.x, map.tab[(int)wallhit.y][(int)wallhit.x]);
-    printf("map.map_height = %d, map.map_width = %d\n", map.map_height, map.map_width);
+    
     while (!(wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_width || wallhit.y > map.map_height) && map.tab[(int)wallhit.y][(int)wallhit.x] != '1')
     {
         if (c == 'E')
@@ -59,7 +57,7 @@ t_wallhit calcule_horizontal(t_map map, t_player player, char c)
             wallhit.dist = 999999999;
             return wallhit;
         }
-        printf("x = %f, y = %f\n", wallhit.x, wallhit.y);
+        // printf("x = %f, y = %f\n", wallhit.x, wallhit.y);
     }
     if (c == 'E')
         wallhit.mur = 'O';
@@ -104,59 +102,62 @@ t_wallhit calcule_vertical(t_map map, t_player player, char c)
 
 t_wallhit put_calcul(t_map map, t_player player, char *str)
 {
-    t_wallhit dist;
+    t_wallhit distverticale = calcule_vertical(map, player, str[0]);
+    t_wallhit disthorizontale = calcule_horizontal(map, player, str[1]);
 
-    if (strcmp(str, "NE") == 0)
-        if (calcule_horizontal(map, player, 'E').dist < calcule_vertical(map, player, 'N').dist)
-            dist = calcule_horizontal(map, player, 'E');
-        else
-            dist = calcule_vertical(map, player, 'N');
-    else if (strcmp(str, "NO") == 0)
-        if (calcule_horizontal(map, player, 'O').dist < calcule_vertical(map, player, 'N').dist)
-            dist = calcule_horizontal(map, player, 'O');
-        else
-            dist = calcule_vertical(map, player, 'N');
-    else if (strcmp(str, "SO") == 0)
-        if (calcule_horizontal(map, player, 'O').dist < calcule_vertical(map, player, 'S').dist)
-            dist = calcule_horizontal(map, player, 'O');
-        else
-            dist = calcule_vertical(map, player, 'S');
-    else if (strcmp(str, "SE") == 0)
-        if (calcule_horizontal(map, player, 'E').dist < calcule_vertical(map, player, 'S').dist)
-            dist = calcule_horizontal(map, player, 'E');
-        else
-            dist = calcule_vertical(map, player, 'S');
-    return (dist);
+    if (distverticale.dist > 1000 && disthorizontale.dist > 1000)
+    {
+        printf("both dist > 1000\n");
+        printf("distverticale.dist = %f, disthorizontale.dist = %f\n", distverticale.dist, disthorizontale.dist);
+        printf("distverticale.x = %f, distverticale.y = %f\n", distverticale.x, distverticale.y);
+        printf("disthorizontale.x = %f, disthorizontale.y = %f\n", disthorizontale.x, disthorizontale.y);
+        printf("player.posx = %f, player.posy = %f\n, player.angle", player.posx, player.posy);
+    }
+
+    if (distverticale.dist < disthorizontale.dist)
+        return (distverticale);
+    else
+        return (disthorizontale);
 }
 
 t_wallhit calcule_dist(t_map map, t_player player, double angle)
 {
     t_wallhit dist_h;
-    t_wallhit dist_v;
-    if (angle + player.angle > 2 * M_PI)
-        player.angle = fmod(player.angle + angle, 2 * M_PI) - 2 * M_PI;
+    ft_bzero(&dist_h, sizeof(t_wallhit));
+    if (angle + player.angle >= 2 * M_PI)
+        player.angle = fmod(player.angle + angle, 2 * M_PI);
     else if (angle + player.angle < 0)
         player.angle = 2 * M_PI + fmod(player.angle + angle, 2 * M_PI);
     else
         player.angle = fmod(player.angle + angle, 2 * M_PI);
+    if (player.angle < 0 || player.angle > 2 * M_PI)
+        scanf("%le", &player.angle);
+
     player.cosinus = cos(player.angle);
     player.sinus = sin(player.angle);
 
-    printf("player.angle = %f\n", player.angle);
-    if (player.angle == M_PI/2 || player.angle == 3*M_PI/2)
+    // printf("player.angle = %f\n", player.angle);
+    if (player.angle == M_PI/2)
         return(calcule_vertical(map, player, 'N'));
-    else if (player.angle == 0 || player.angle == M_PI)
+    else if (player.angle == 3*M_PI/2)
+        return(calcule_vertical(map, player, 'S'));
+    else if (player.angle == 0 || player.angle == 2*M_PI)
         return(calcule_horizontal(map, player, 'E'));
+    else if (player.angle == M_PI)
+        return(calcule_horizontal(map, player, 'O'));
     else
     {
         if (player.angle > 0 && player.angle < M_PI/2)
-            dist_h = put_calcul(map, player, "NE");
+            return put_calcul(map, player, "NE");
         else if (player.angle > M_PI/2 && player.angle < M_PI)
-            dist_h = put_calcul(map, player, "NO");
+             return put_calcul(map, player, "NO");
         else if (player.angle > M_PI && player.angle < 3*M_PI/2)
-            dist_h = put_calcul(map, player, "SO");
+            return  put_calcul(map, player, "SO");
         else if (player.angle > 3*M_PI/2 && player.angle < 2*M_PI)
-            dist_h = put_calcul(map, player, "SE");
+            return put_calcul(map, player, "SE");
+
+        printf("NOOOOOOOOOOOOOOOOOOOO\n");
+        printf ("player.angle = %f\n", player.angle);  
         return (dist_h);
     }
 }
@@ -173,42 +174,42 @@ void printmap(char **map)
     }
 }
 
-int main() {
-    // Initialisation de la carte et du joueur
-    t_map map;
-    map.map_width = 5;
-    map.map_height = 5;
-    char tab[5][5]={"11111",
-                    "10001",
-                    "10011",
-                    "10001",
-                    "11111"};
-    map.tab = malloc(sizeof(char *) * map.map_height);
-    for (int i = 0; i < map.map_height; i++) {
-        map.tab[i] = malloc(sizeof(char) * map.map_width);
-        for (int j = 0; j < map.map_width; j++) {
-            map.tab[i][j] = tab[i][j];
-        }
-    }
+// int main() {
+//     // Initialisation de la carte et du joueur
+//     t_map map;
+//     map.map_width = 5;
+//     map.map_height = 5;
+//     char tab[5][5]={"11111",
+//                     "10001",
+//                     "10011",
+//                     "10001",
+//                     "11111"};
+//     map.tab = malloc(sizeof(char *) * map.map_height);
+//     for (int i = 0; i < map.map_height; i++) {
+//         map.tab[i] = malloc(sizeof(char) * map.map_width);
+//         for (int j = 0; j < map.map_width; j++) {
+//             map.tab[i][j] = tab[i][j];
+//         }
+//     }
 
-    t_player player;
-    player.posx = 2.5;
-    player.posy = 2.5;
-    player.angle = M_PI / 4.0;  // Angle de 45 degrés
+//     t_player player;
+//     player.posx = 2.5;
+//     player.posy = 2.5;
+//     player.angle = M_PI / 4.0;  // Angle de 45 degrés
 
-    // Tester les fonctions de calcul de distance
-    t_wallhit dist_h = calcule_dist(map, player, 0.0);  // Tester avec un angle de 0 degrés
-    t_wallhit dist_v = calcule_dist(map, player, M_PI / 4);  // Tester avec un angle de 90 degrés
+//     // Tester les fonctions de calcul de distance
+//     t_wallhit dist_h = calcule_dist(map, player, 0.0);  // Tester avec un angle de 0 degrés
+//     t_wallhit dist_v = calcule_dist(map, player, M_PI / 4);  // Tester avec un angle de 90 degrés
 
-    // Afficher les résultats
-    printf("Distance horizontale : x=%.2f, y=%.2f, dist=%.2f, mur=%c\n", dist_h.x, dist_h.y, dist_h.dist, dist_h.mur);
-    printf("Distance verticale : x=%.2f, y=%.2f, dist=%.2f, mur=%c\n", dist_v.x, dist_v.y, dist_v.dist, dist_v.mur);
+//     // Afficher les résultats
+//     printf("Distance horizontale : x=%.2f, y=%.2f, dist=%.2f, mur=%c\n", dist_h.x, dist_h.y, dist_h.dist, dist_h.mur);
+//     printf("Distance verticale : x=%.2f, y=%.2f, dist=%.2f, mur=%c\n", dist_v.x, dist_v.y, dist_v.dist, dist_v.mur);
 
-    // Libérer la mémoire allouée pour la carte
-    for (int i = 0; i < map.map_height; i++) {
-        free(map.tab[i]);
-    }
-    free(map.tab);
+//     // Libérer la mémoire allouée pour la carte
+//     for (int i = 0; i < map.map_height; i++) {
+//         free(map.tab[i]);
+//     }
+//     free(map.tab);
 
-    return 0;
-}
+//     return 0;
+// }

@@ -19,7 +19,7 @@
 # include <math.h>
 # include "structs.h"
 #include "../minilibx-linux/mlx.h"
-#include "../libft/libft.h"
+#include "../Libft/libft.h"
 
 t_wallhit	calcule_horizontal(t_map map, t_player	player, char c);
 t_wallhit	calcule_vertical(t_map map, t_player	player, char c);

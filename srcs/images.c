@@ -36,9 +36,9 @@ void printmappos(t_data data)
 
 int initmlx(t_data *data)
 {
-    // int taille;
+     int taille;
 
-    // taille = 64;
+     taille = 64;
     data->mlx = mlx_init();
     if (data->mlx == NULL)
         return 1;
@@ -48,14 +48,20 @@ int initmlx(t_data *data)
     create_base_image (data->floor, data->ceiling, data->mlx, data);
     // // change_image(data)
     // // calcule_dist(data->map.tab, data->player, 0);
-    // data->textures[0].image = mlx_xpm_file_to_image(data->mlx, data->east, &taille, &taille);
-    // data->textures[0].addr = mlx_get_data_addr(data->textures[0].image, &data->textures[0].bpp, &data->textures[0].sizeline, &data->textures[0].endian);
-    // data->textures[1].image = mlx_xpm_file_to_image(data->mlx, data->west, &taille, &taille);
-    // data->textures[1].addr = mlx_get_data_addr(data->textures[1].image, &data->textures[1].bpp, &data->textures[1].sizeline, &data->textures[1].endian);
-    // data->textures[2].image = mlx_xpm_file_to_image(data->mlx, data->north, &taille, &taille);
-    // data->textures[2].addr = mlx_get_data_addr(data->textures[2].image, &data->textures[2].bpp, &data->textures[2].sizeline, &data->textures[2].endian);
-    // data->textures[3].image = mlx_xpm_file_to_image(data->mlx, data->south, &taille, &taille);
-    // data->textures[3].addr = mlx_get_data_addr(data->textures[3].image, &data->textures[3].bpp, &data->textures[3].sizeline, &data->textures[3].endian);
+    data->textures[0].image = mlx_xpm_file_to_image(data->mlx, data->east, &taille, &taille);
+    data->textures[0].addr = mlx_get_data_addr(data->textures[0].image, &data->textures[0].bpp, &data->textures[0].sizeline, &data->textures[0].endian);
+    data->textures[1].image = mlx_xpm_file_to_image(data->mlx, data->west, &taille, &taille);
+    data->textures[1].addr = mlx_get_data_addr(data->textures[1].image, &data->textures[1].bpp, &data->textures[1].sizeline, &data->textures[1].endian);
+    data->textures[2].image = mlx_xpm_file_to_image(data->mlx, data->north, &taille, &taille);
+    data->textures[2].addr = mlx_get_data_addr(data->textures[2].image, &data->textures[2].bpp, &data->textures[2].sizeline, &data->textures[2].endian);
+    data->textures[3].image = mlx_xpm_file_to_image(data->mlx, data->south, &taille, &taille);
+    data->textures[3].addr = mlx_get_data_addr(data->textures[3].image, &data->textures[3].bpp, &data->textures[3].sizeline, &data->textures[3].endian);
+    
+    if (data->textures[0].image == NULL || data->textures[1].image == NULL || data->textures[2].image == NULL || data->textures[3].image == NULL)
+    {
+        printf("error texture\n");
+        return 1;
+    }
     // printf("angle in image = %f\n", data->player.angle);
     // printf("dist.x : %f\n", calcule_dist(data->map.tab, data->player,0).x);
     // printf("dist.y : %f\n", calcule_dist(data->map.tab, data->player,0).y);
@@ -73,9 +79,9 @@ int initmlx(t_data *data)
     // t_player player;
     // player.posx = 6.5;
     // player.posy = 1.01;
-    data->player.angle =  3.874631;
-    data->player.posx = 24.431634;
-    data->player.posy = 18.934880;
+    // data->player.angle =  1.63;
+    // data->player.posx = 38.5;
+    // data->player.posy = 13.5;
 
     // player.angle = 0.00000;
     // data->player= player;
@@ -184,7 +190,7 @@ int selectcolor(t_data *data, t_wallhit wall, double step)
     int color;
     char *pixel;
     t_wallhit texture_coordinate;
-
+    (void)pixel;
     texture_coordinate = create_texture_coord(data, wall, step);
       
     if (wall.mur == 'E')
@@ -198,7 +204,7 @@ int selectcolor(t_data *data, t_wallhit wall, double step)
     pixel = data->textures[wall.mur].addr
 		+ (int)texture_coordinate.x * data->textures[wall.mur].sizeline
 		+ (int)texture_coordinate.y * data->textures[wall.mur].bpp / 8;
-	color = *(int *) pixel;
+	color = 0x00000000;
 	return (color);
     
 }

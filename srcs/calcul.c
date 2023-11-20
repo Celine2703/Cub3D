@@ -79,7 +79,6 @@ t_wallhit calcule_vertical(t_map  map, t_player player)
         else
             wallhit.y--;
         // printf("wallhit.y in calcul vert = %f\n", wallhit.y);
-        if ()
         wallhit.x = player.posx + calcule_x(player, wallhit.y);
         // if (wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_width || wallhit.y > map.map_height)
         // { 
