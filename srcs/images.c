@@ -42,19 +42,39 @@ int initmlx(t_data *data)
     data->mlx = mlx_init();
     if (data->mlx == NULL)
         return 1;
-    data->win = mlx_new_window(data->mlx, 640, 640, "CUB1D");
+    data->win = mlx_new_window(data->mlx, 640, 640, "CUB3D");
     if (data->win == NULL)
         return 1;
     create_base_image (data->floor, data->ceiling, data->mlx, data);
     // // change_image(data)
     // // calcule_dist(data->map.tab, data->player, 0);
     data->textures[0].image = mlx_xpm_file_to_image(data->mlx, data->east, &taille, &taille);
+    if (data->textures[0].image == NULL)
+    {
+        printf("error texture\n");
+        return 1;
+    }
     data->textures[0].addr = mlx_get_data_addr(data->textures[0].image, &data->textures[0].bpp, &data->textures[0].sizeline, &data->textures[0].endian);
     data->textures[1].image = mlx_xpm_file_to_image(data->mlx, data->west, &taille, &taille);
+    if (data->textures[1].image == NULL)
+    {
+        printf("error texture\n");
+        return 1;
+    }
     data->textures[1].addr = mlx_get_data_addr(data->textures[1].image, &data->textures[1].bpp, &data->textures[1].sizeline, &data->textures[1].endian);
     data->textures[2].image = mlx_xpm_file_to_image(data->mlx, data->north, &taille, &taille);
+    if (data->textures[2].image == NULL)
+    {
+        printf("error texture\n");
+        return 1;
+    }
     data->textures[2].addr = mlx_get_data_addr(data->textures[2].image, &data->textures[2].bpp, &data->textures[2].sizeline, &data->textures[2].endian);
     data->textures[3].image = mlx_xpm_file_to_image(data->mlx, data->south, &taille, &taille);
+    if (data->textures[3].image == NULL)
+    {
+        printf("error texture\n");
+        return 1;
+    }
     data->textures[3].addr = mlx_get_data_addr(data->textures[3].image, &data->textures[3].bpp, &data->textures[3].sizeline, &data->textures[3].endian);
     
     if (data->textures[0].image == NULL || data->textures[1].image == NULL || data->textures[2].image == NULL || data->textures[3].image == NULL)
@@ -124,7 +144,7 @@ void change_image(t_data *data)
         distance[x] = calcule_dist(data->map, data->player, PI);
         
         distance[x].dist = distance[x].dist * cosl(PI);
-        height = 320.0/distance[x].dist;
+        height = 160/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
         // printf("distance[%d] = %f\n", x, distance->dist);
         // printf("height = %f\n", height);
@@ -143,21 +163,21 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
     int		y;
     char	*pixel;
     double test = height;
-    (void) test;
     y = 0;
     // printf ("pointer = %p\n", data->base.addr);
-
-     if (test > 320)
-     {
-        test = (test - 320) /2;
-        create_texture_coord(0, wall, (test*320)/64);
-     }
-    // while (test > 320)
-	// {
-	// 	create_texture_coord(data, wall, 64.0 / (height * 2.0));
-	// 	test -= 64.0 / (height * 2.0);
-    //     // printf("test = %f\n", test);
-	// }
+    // if (test > 320)
+    // {
+    //    test = (test - 320) /2.0;
+    //    create_texture_coord(0, wall, (test*320)/320);
+    // }
+    while (test > 320)
+	{
+		create_texture_coord(data, wall, 64.0 / (height * 64.0));
+		test -= 64.0 / (height * 2.0);
+        // printf("test = %f\n", test);
+	}
+    printf("test = %f\n", test);
+    printf ("height = %f\n", height);
     while (y < 640)
 	{
  		pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
@@ -167,7 +187,9 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
 			*(int *) pixel = data->floor.color;
 		else
 		{
-			*(int *) pixel = selectcolor(data, wall, 64.0/(height * 2.0));
+            
+            *(int *) pixel = selectcolor(data, wall, 64.0/(height * 2));
+			// *(int *) pixel = selectcolor(data, wall, 64.0/(height * 2.0));
             // *(int *) pixel = 0x00FF0000;
 		}
 		y++;
@@ -184,19 +206,29 @@ t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
     if (!data)
 	{
 		y = step;
+        if (y != 0)
+            printf("y = %f\n", y);
 		return (wall);
 	}
    
     if (wall.mur == 'O' || wall.mur == 'E')
 	{
-		texture_coordinate.y = (wall.y - (int)wall.y) * 64.0;
+		texture_coordinate.y = (wall.y - (int)wall.y) * 64;
 	}
 	else
 	{
-		texture_coordinate.y = (wall.x - (int)wall.x) * 64.0;
+		texture_coordinate.y = (wall.x - (int)wall.x) * 64;
 	}
 	texture_coordinate.x = floor(y);
-   
+    // if (texture_coordinate.x > 63 || texture_coordinate.x < 0 || texture_coordinate.y > 63 || texture_coordinate.y < 0)
+    // {
+
+    //     printf("texture_coordinate.x = %f\n", texture_coordinate.x);
+    //     printf("texture_coordinate.y = %f\n", texture_coordinate.y);
+    //     printf("y = %f\n", y);
+    //     printf("step = %f\n", step);
+    //     printf("complete : %f\n", step*640.0);
+    // }
     y+= step;
     return (texture_coordinate);
 }
