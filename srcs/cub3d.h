@@ -20,16 +20,19 @@
 # include "structs.h"
 #include "../minilibx-linux/mlx.h"
 
-t_wallhit	calcule_horizontal(t_map map, t_player	player);
-t_wallhit	calcule_vertical(t_map map, t_player	player);
+//calculs.c
 double		calcule_y(t_player player, double x);
 double		calcule_x(t_player player, double y);
+t_wallhit	calcule_horizontal(t_map map, t_player	player, char c);
+t_wallhit	calcule_vertical(t_map map, t_player	player, char c);
+t_wallhit	put_calcul(t_map map, t_player player, char *str);
 t_wallhit	calcule_dist(t_map map, t_player player, double angle);
 void		printmap(char **map);
 
 int			initmlx(t_data *data);
 int			create_base_image(t_color f, t_color ceil, void *mlx, t_data *d);
 
+//events.c
 int			ft_key(int key, t_data *data);
 int			ft_mov(t_map map, t_player *player, int key);
 void		ft_putmov(t_map map, t_player *player, double angle);

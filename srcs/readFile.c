@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "readFile.h"
 
 char	**getfile(t_data *data)
@@ -33,6 +32,7 @@ int	getallline(t_data *data)
 	int		fd;
 	char	*line;
 	int		i;
+	size_t	len;
 
 	fd = open(data->filename, O_RDONLY);
 	if (fd == -1)
@@ -42,7 +42,7 @@ int	getallline(t_data *data)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		size_t len = ft_strlen(line);
+		len = ft_strlen(line);
 		if (len >= 2)
 			line[len - 1] = 0;
 		else
