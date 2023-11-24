@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 		return (0);
 	printf("Success\n");
 	// printinfo(data);
-	parseMap(&data);
+	parse_map(&data);
 	printinfo(data);
 	initmlx (&data);
 	ft_destroy_data(&data);

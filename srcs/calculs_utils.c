@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculs_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmartin <cmartin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:38:10 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/23 10:01:43 by cmartin          ###   ########.fr       */
+/*   Updated: 2023/11/24 13:32:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,39 +73,33 @@ t_wallhit	calcule_horizontal(t_map map, t_player p, char c)
 	return (w);
 }
 
-t_wallhit	calcule_vertical(t_map map, t_player player, char c)
+t_wallhit	calcule_vertical(t_map map, t_player p, char c)
 {
-	t_wallhit	wallhit;
+	t_wallhit	w;
 
-	ft_bzero(&wallhit, sizeof(t_wallhit));
+	ft_bzero(&w, sizeof(t_wallhit));
 	if (c == 'N')
-		wallhit.y = ceil(player.posy);
+		w.y = ceil(p.posy);
 	else
-		wallhit.y = floor(player.posy) - 0.001;
-	wallhit.x = player.posx + calcule_x(player, wallhit.y);
-	while (!(wallhit.x < 0 || wallhit.y < 0 || wallhit.x > map.map_width
-			|| wallhit.y > map.map_height)
-		&& map.tab[(int)wallhit.y][(int)wallhit.x] != '1')
+		w.y = floor(p.posy) - 0.001;
+	w.x = p.posx + calcule_x(p, w.y);
+	while (!(w.x < 0 || w.y < 0 || w.x > map.map_width || w.y > map.map_height)
+		&& map.tab[(int)w.y][(int)w.x] != '1')
 	{
 		if (c == 'N')
-			wallhit.y++;
+			w.y++;
 		else
-			wallhit.y--;
-		wallhit.x = player.posx + calcule_x(player, wallhit.y);
-		if (wallhit.x < 0 || wallhit.y < 0
-			|| wallhit.x > map.map_width || wallhit.y > map.map_height)
-		{
-			wallhit.dist = 999999999;
-			return (wallhit);
-		}
+			w.y--;
+		w.x = p.posx + calcule_x(p, w.y);
+		if (w.x < 0 || w.y < 0 || w.x > map.map_width || w.y > map.map_height)
+			return (w.dist = 999999999, w);
 	}
 	if (c == 'N')
-		wallhit.mur = 'S';
+		w.mur = 'S';
 	else
-		wallhit.mur = 'N';
-	wallhit.dist = sqrt(pow(player.posx - wallhit.x, 2)
-			+ pow(player.posy - wallhit.y, 2));
-	return (wallhit);
+		w.mur = 'N';
+	w.dist = sqrt(pow(p.posx - w.x, 2) + pow(p.posy - w.y, 2));
+	return (w);
 }
 
 t_wallhit	put_calcul(t_map map, t_player player, char *str)

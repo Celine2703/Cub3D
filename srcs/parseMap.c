@@ -13,37 +13,30 @@
 #include "readFile.h"
 #include "cub3d.h"
 
-double select_direction(char dir);
 // void replace_spaceandplayer(t_data *data);
-int replace_player(t_data *data);
-int checkmap(t_data *data);
-void replacespace(t_data *data);
 
-void printrevsplit(char **split)
+void	printrevsplit(char **split)
 {
 	int	i;
 
 	i = 0;
 	while (split[i] != NULL)
-	{
 		i++;
-	}
-	while (i>=0)
+	while (i >= 0)
 	{
 		if (split[i] != NULL)
 			printf("%d : %s\n", i, split[i]);
-		else 
+		else
 			printf("%d : 0123456789\n", i);
 		i--;
 	}
 }
 
-
-int parseMap(t_data *data)
+int	parse_map(t_data *data)
 {
-	t_pair lines;
-	int longest_line;
-	
+	t_pair	lines;
+	int		longest_line;
+
 	if (ft_startmap(data->file, &lines))
 	{
 		printf("Error\n");
@@ -56,13 +49,11 @@ int parseMap(t_data *data)
 	data->map.map_width = longest_line;
 	printf("height %d\n", data->map.map_height);
 	printf("width %d\n", data->map.map_width);
-
 	if (find_copy_map(data, lines) == -1)
-	{ 
+	{
 		printf("GORRRRRRRRRRRRRRRRRRRRRRRRRRR Error\n");
 		return (-1);
-	
-	}// printsplit(data->map.tab);
+	}
 	reverse_map(data->map);
 	printf("LAAAAAAAAAAAAAAAAAA\n");
 	printsplit(data->map.tab);
@@ -83,13 +74,14 @@ int parseMap(t_data *data)
 	// on transforme les caracteres N, S, E, W en 0 et on enregistre la position du joueur
 	// on transforme les ' ' en 1
 	// on verifie que la map est entouree de 1 (donc chaque 0 
-	return(0);
+	return (0);
 }
-int replace_player(t_data *data)
+
+int	replace_player(t_data *data)
 {
-	int i;
-	int j;
-	int err;
+	int	i;
+	int	j;
+	int	err;
 
 	err = 0;
 	i = 0;
@@ -98,7 +90,8 @@ int replace_player(t_data *data)
 		j = 0;
 		while (data->map.tab[i][j])
 		{
-			if (data->map.tab[i][j] == 'N' || data->map.tab[i][j] == 'S' || data->map.tab[i][j] == 'E' || data->map.tab[i][j] == 'W')
+			if (data->map.tab[i][j] == 'N' || data->map.tab[i][j] == 'S'
+				|| data->map.tab[i][j] == 'E' || data->map.tab[i][j] == 'W')
 			{
 				data->player.angle = select_direction(data->map.tab[i][j]);
 				data->map.tab[i][j] = '0';
@@ -110,10 +103,10 @@ int replace_player(t_data *data)
 		}
 		i++;
 	}
-	return err;
+	return (err);
 }
 
-double select_direction(char dir)
+double	select_direction(char dir)
 {
 	if (dir == 'N')
 		return (M_PI / 2);
@@ -125,10 +118,11 @@ double select_direction(char dir)
 		return (M_PI);
 	return (0);
 }
+
 int	find_copy_map(t_data *data, t_pair lines)
 {
-	int i;
-	
+	int	i;
+
 	data->map.tab = ft_calloc(data->map.map_height + 1, sizeof(char *));
 	if (data->map.tab == NULL)
 		return (-1);
@@ -138,7 +132,8 @@ int	find_copy_map(t_data *data, t_pair lines)
 		data->map.tab[i] = ft_calloc(data->map.map_width + 1, sizeof(char));
 		if (data->map.tab[i] == NULL)
 			return (-1);
-		ft_strlcpy(data->map.tab[i], data->file[lines.first + i], data->map.map_width + 1);
+		ft_strlcpy(data->map.tab[i], data->file[lines.first + i],
+			data->map.map_width + 1);
 		i++;
 	}
 	return (0);
@@ -188,14 +183,14 @@ int	ft_startmap(char **file, t_pair *lines)
 	return (0);
 }
 
-void reverse_map(t_map map)
+void	reverse_map(t_map map)
 {
-	int start;
-	int end;
-	char *tmp;
+	int		start;
+	int		end;
+	char	*tmp;
+
 	start = 0;
 	end = map.map_height - 1;
-
 	while (start <= end)
 	{
 		tmp = map.tab[start];
@@ -204,29 +199,28 @@ void reverse_map(t_map map)
 		start++;
 		end--;
 	}
-	
 }
 
-
-int checkmap(t_data *data)
+int	checkmap(t_data *dt)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (data->map.tab[i])
+	while (dt->map.tab[i])
 	{
 		j = 0;
-		while (data->map.tab[i][j])
+		while (dt->map.tab[i][j])
 		{
-			if (data->map.tab[i][j] == '0' )
+			if (dt->map.tab[i][j] == '0' )
 			{
-				if (i == 0 || i == data->map.map_height - 1 || j == 0 || j == data->map.map_width - 1)
+				if (i == 0 || i == dt->map.map_height - 1
+					|| j == 0 || j == dt->map.map_width - 1)
 					return (printf("Error\n"));
-				if ((data->map.tab[i + 1][j] != '0' && data->map.tab[i + 1][j] != '1') ||
-					 (data->map.tab[i - 1][j] != '0' && data->map.tab[i - 1][j] != '1') || 
-					 (data->map.tab[i][j + 1] != '0' && data->map.tab[i][j + 1] != '1') || 
-					 (data->map.tab[i][j - 1] != '0' && data->map.tab[i][j - 1] != '1'))
+				if ((dt->map.tab[i + 1][j] != '0' && dt->map.tab[i + 1][j] != '1')
+					|| (dt->map.tab[i - 1][j] != '0' && dt->map.tab[i - 1][j] != '1')
+					|| (dt->map.tab[i][j + 1] != '0' && dt->map.tab[i][j + 1] != '1')
+					|| (dt->map.tab[i][j - 1] != '0' && dt->map.tab[i][j - 1] != '1'))
 					return (printf("Error\n"));
 			}
 			j++;
@@ -236,16 +230,16 @@ int checkmap(t_data *data)
 	return (0);
 }
 
-void replacespace(t_data *data)
+void	replacespace(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (data->map.tab[i])
 	{
 		j = 0;
-		while ( j < data->map.map_width)
+		while (j < data->map.map_width)
 		{
 			if (data->map.tab[i][j] == ' ' || data->map.tab[i][j] == 0)
 				data->map.tab[i][j] = '1';

@@ -336,7 +336,7 @@ int selectcolor(t_data *data, t_wallhit wall, double step)
 // 		return (0);
 	
 // 	// printinfo(data);
-// 	parseMap(&data);
+// 	parse_map(&data);
 // 	destroy_data(&data);
 //     // void *mlx = mlx_init();
 //     // void *win = mlx_new_window(mlx, 640, 640, "CUB1D");
