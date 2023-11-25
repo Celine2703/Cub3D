@@ -26,7 +26,7 @@ t_wallhit	calcule_dist_exception(t_map map, t_player player)
 		return (calcule_horizontal(map, player, 'O'));
 }
 
-t_wallhit	calcule_dist(t_map map, t_player player, double angle)
+t_wallhit	calcule_dist(t_map map, t_player player, long double angle)
 {
 	t_wallhit	dist_h;
 

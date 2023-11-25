@@ -3,14 +3,14 @@
 #include "readFile.h"
 
 
-int selectcolor(t_data *data, t_wallhit wall, double step);
-t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step);
+int selectcolor(t_data *data, t_wallhit wall, long double step);
+t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step);
 
 void printwallhit(t_wallhit wh)
 {
-    printf("wallhit.x = %f\n", wh.x);
-    printf("wallhit.y = %f\n", wh.y);
-    printf("wallhit.dist = %f\n", wh.dist);
+    printf("wallhit.x = %Lf\n", wh.x);
+    printf("wallhit.y = %Lf\n", wh.y);
+    printf("wallhit.dist = %Lf\n", wh.dist);
     printf("wallhit.mur = %c\n", wh.mur);
 }
 
@@ -133,7 +133,7 @@ int initmlx(t_data *data)
 void change_image(t_data *data)
 {
     t_wallhit distance[640];
-    double height;
+    long double height;
     int x = 0;
     long double PI = (2.0 * M_PI)/9.0;
 
@@ -170,11 +170,11 @@ void change_image(t_data *data)
     // ensuite double boucle ou on parcours toute l'image pour mettre le pixel correspondant
 }
 
-void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
+void	rewriteline(t_data *data, int x, long double height,t_wallhit wall)
 {
     int		y;
     char	*pixel;
-    double test = height;
+    long double test = height;
     y = 0;
     // printf ("pointer = %p\n", data->base.addr);
     // if (test > 320)
@@ -188,8 +188,8 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
 		test -= 64.0 / (height * 2.0);
         // printf("test = %f\n", test);
 	}
-    printf("test = %f\n", test);
-    printf ("height = %f\n", height);
+    printf("test = %Lf\n", test);
+    printf ("height = %Lf\n", height);
     while (y < 640)
 	{
  		pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
@@ -210,16 +210,16 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
 }
 
 
-t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
+t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step)
 {
     t_wallhit texture_coordinate;
-    static double	y;
+    static long double	y;
     
     if (!data)
 	{
 		y = step;
         if (y != 0)
-            printf("y = %f\n", y);
+            printf("y = %Lf\n", y);
 		return (wall);
 	}
    
@@ -245,7 +245,7 @@ t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
     return (texture_coordinate);
 }
 
-int selectcolor(t_data *data, t_wallhit wall, double step)
+int selectcolor(t_data *data, t_wallhit wall, long double step)
 {
     int color;
     char *pixel;
