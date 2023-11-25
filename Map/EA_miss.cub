@@ -2,7 +2,7 @@
 
 F 255,100,251
 
-EA ./image/textureE.xpm
+NO ./image/textureE.xpm
 SO ./image/textureS.xpm
 WE ./image/textureW.xpm
 

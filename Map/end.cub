@@ -1,7 +1,7 @@
 
 
 F 255,100,251
-
+C 50,50,50
 
 NO ./image/textureN.xpm
 EA ./image/textureE.xpm

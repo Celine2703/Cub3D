@@ -180,6 +180,8 @@ int	ft_startmap(char **file, t_pair *lines)
 		free(line);
 		i++;
 	}
+	if (lines->first == -1)
+		return (-1);
 	return (0);
 }
 

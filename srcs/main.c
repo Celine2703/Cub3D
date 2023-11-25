@@ -45,12 +45,12 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	if (init_data(&data, argc, argv))
-		return (0);
+		return (1);
 	if (parse_error(&data))
-		return (0);
-	printf("Success\n");
+		return (1);
 	// printinfo(data);
-	parse_map(&data);
+	if (parse_map(&data))
+		ft_destroy_data(&data);
 	printinfo(data);
 	initmlx (&data);
 	ft_destroy_data(&data);
