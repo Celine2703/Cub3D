@@ -177,8 +177,10 @@ void	rewriteline(t_data *data, int x, long double height,t_wallhit wall)
     y = 0;
     if (height > 320)
     {
-        printf("texture coord  %Lf",(height - 320) / 2 );
-        create_texture_coord(0, wall, (height - 320) / 2); 
+        // long double startingpos = (height - 320) / 2.0;
+		long double startingpos = 1/320.0 * height;
+		printf ("startingpos = %Lf\n", startingpos);
+		create_texture_coord(0, wall, startingpos);
     }	
         
         
