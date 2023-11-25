@@ -1,14 +1,9 @@
-faire les events
+espaces au sein des elements
 
-il reste coté affichage
-- calculer la distance et la taille du mur pour chaque colonne de la fenetre (une boucle sur le calcul de distance avec l'angle qui varie de -40 a +40) 
-- selectioner le bon pixel de la bonne texture 
-- on modifie l'image avec ce pixel
-Coté mlx :
-- importer les texture sous format image (mlxcreateImagefrom...()) et remplir notre structure correspondante
-- creer les évènements de deplacement et de rotation
+Si un problème de configuration de n’importe quel type est rencontré dans
+le fichier, le programme doit quitter et renvoyer "Error\n" suivi d’un message
+d’erreur explicite de votre choix.
 
-attention si angle devenait négatif?
-vérifier si le joueur est dans un mur
+textures quand proche du mur
 
-moins d appel a calcule dist pour les events
+verif erreurs de parsing
