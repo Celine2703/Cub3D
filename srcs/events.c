@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/25 18:57:03 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/25 21:16:53 by ccravero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	ft_key(int key, t_data *data)
 		data -> player.angle = 0;
 	if (ft_mov(data->map, &(data->player), key))
 		change_image(data);
-	printf("angle = %Lf\n", data->player.angle);
-	printf("posx = %Lf\n", data->player.posx);
-	printf("posy = %Lf\n", data->player.posy);
+	// printf("angle = %Lf\n", data->player.angle);
+	// printf("posx = %Lf\n", data->player.posx);
+	// printf("posy = %Lf\n", data->player.posy);
 	return (0);
 }

@@ -4,8 +4,6 @@ Si un problème de configuration de n’importe quel type est rencontré dans
 le fichier, le programme doit quitter et renvoyer "Error\n" suivi d’un message
 d’erreur explicite de votre choix.
 
-textures quand proche du mur
-
 verif erreurs de parsing
 
-mouvements dans le coin
+trou dans les coins
