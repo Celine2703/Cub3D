@@ -135,7 +135,7 @@ void change_image(t_data *data)
     t_wallhit distance[640];
     long double height;
     int x = 0;
-    long double PI = (2.0 * M_PI)/9.0;
+    long double PI = M_PI / 6.1;
 
     // printf("map : %c\n" ,data->map.tab[0][0]);
 	while (x < 640)
@@ -143,7 +143,7 @@ void change_image(t_data *data)
 		distance[x] = calcule_dist(data->map, data->player, PI);
 		distance[x].dist = distance[x].dist * cosl(PI);
 		x++;
-		PI -= (4.0*M_PI)/(9.0 * 640.0);
+		PI -= (M_PI / 3) / 640.0;
 	}
 	x = 0;
     while (x < 640)
@@ -155,7 +155,7 @@ void change_image(t_data *data)
 			distance[x].mur = distance[x - 1].mur;
 		}
         // distance[x].dist = distance[x].dist * cosl(PI);
-        height = 160/distance[x].dist;
+        height = 320/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
         // printf("distance[%d] = %f\n", x, distance->dist);
         // printf("height = %f\n", height);
@@ -173,20 +173,17 @@ void	rewriteline(t_data *data, int x, long double height,t_wallhit wall)
 {
     int		y;
     char	*pixel;
-    long double test = height;
+    // long double test = height;
     y = 0;
-    // printf ("pointer = %p\n", data->base.addr);
-    // if (test > 320)
-    // {
-    //    test = (test - 320) /2.0;
-    //    create_texture_coord(0, wall, (test*320)/320);
-    // }
-    while (test > 320)
-	{
-		create_texture_coord(data, wall, 64.0 / (height * 64.0));
-		test -= 64.0 / (height * 2.0);
-        // printf("test = %f\n", test);
-	}
+    if (height > 320)
+    {
+        printf("texture coord  %Lf",(height - 320) / 2 );
+        create_texture_coord(0, wall, (height - 320) / 2); 
+    }	
+        
+        
+    // create_texture_coord(data, wall, 64.0 / (height * 64.0));
+	// test -= 64.0 / (height * 2.0);
 
     while (y < 640)
 	{

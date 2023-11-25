@@ -7,3 +7,5 @@ d’erreur explicite de votre choix.
 textures quand proche du mur
 
 verif erreurs de parsing
+
+mouvements dans le coin
