@@ -138,11 +138,23 @@ void change_image(t_data *data)
     long double PI = (2.0 * M_PI)/9.0;
 
     // printf("map : %c\n" ,data->map.tab[0][0]);
+	while (x < 640)
+	{
+		// printf ("PI = %f", PI);
+		distance[x] = calcule_dist(data->map, data->player, PI);
+		distance[x].dist = distance[x].dist * cosl(PI);
+		height = 160/distance[x].dist;
+		rewriteline(data, x, height,distance[x]);
+		// printf("distance[%d] = %f\n", x, distance->dist);
+		// printf("height = %f\n", height);
+		// printf("angle : %f\n", PI);
+		x++;
+		PI -= (4.0*M_PI)/(9.0 * 640.0);
     while (x < 640)
     {
         // printf ("PI = %f", PI);
         distance[x] = calcule_dist(data->map, data->player, PI);
-        
+        if (distance[x-1].mur != distance[x].mur && distance[x - 1].mur == )
         distance[x].dist = distance[x].dist * cosl(PI);
         height = 160/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
@@ -151,7 +163,7 @@ void change_image(t_data *data)
         // printf("angle : %f\n", PI);
         x++;
         PI -= (4.0*M_PI)/(9.0 * 640.0);
-    }
+	}
     mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
     
     // on commence par calculer la distance du mur pour chaque colonne
