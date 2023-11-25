@@ -2,10 +2,10 @@
 C50,50,120
 F100,50,50
 
-NO /home/ccravero/Cub3D//image/textureN.xpm
-SO /home/ccravero/Cub3D//image/textureS.xpm
-WE /home/ccravero/Cub3D//image/textureW.xpm
-EA /home/ccravero/Cub3D//image/textureE.xpm
+NO /image/textureN.xpm
+SO /image/textureS.xpm
+WE /image/textureW.xpm
+EA /image/textureE.xpm
 
 111
 101

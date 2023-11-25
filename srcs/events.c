@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/25 14:41:12 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:02:09 by ccravero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 #include "readFile.h"
 
 void	ft_putdist_wall(t_wallhit distance, t_player *player)
-{
-	if (distance.x == floor(distance.x))
+{	
+	if (floor(distance.x) != floor (player->posx) )
 	{
 		if (distance.x > player->posx)
-			player->posx = distance.x - 0.01;
-		else if (distance.x < player->posx)
 			player->posx = distance.x + 0.01;
+		else if (distance.x < player->posx)
+			player->posx = distance.x - 0.01;
 	}
 	else
 		player->posx = distance.x;
-	if (distance.y == floor(distance.y))
+	if (distance.y == floor(distance.y)|| distance.y == ceil(distance.y) -0.001)
 	{
 		if (distance.y > player->posy)
-			player->posy = distance.y - 0.01;
-		else if (distance.y < player->posy)
 			player->posy = distance.y + 0.01;
+		else if (distance.y < player->posy)
+			player->posy = distance.y - 0.01;
 	}
 	else
 		player->posy = distance.y;
@@ -41,8 +41,11 @@ void	ft_putmov(t_map map, t_player *player, long double angle)
 
 	player->angle = angle;
 	distance = calcule_dist(map, *player, 0);
+	printf("distance.dist = %Lf\n", distance.dist);
+	printf("distance.x = %Lf\n", distance.x);
+	printf("distance.y = %Lf\n", distance.y);
 	if (distance.dist <= 0.21)
-		ft_putdist_wall(distance, player);
+		return;
 	else
 	{
 		player->posx += 0.2 * cos(angle);
