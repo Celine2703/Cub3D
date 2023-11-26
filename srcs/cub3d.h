@@ -21,14 +21,14 @@
 # include "../minilibx-linux/mlx.h"
 
 //calculs_utils.c
-long double		calcule_y(t_player player, long double x);
-long double		calcule_x(t_player player, long double y);
+double		calcule_y(t_player player, double x);
+double		calcule_x(t_player player, double y);
 t_wallhit	calcule_horizontal(t_map map, t_player	player, char c);
 t_wallhit	calcule_vertical(t_map map, t_player	player, char c);
 t_wallhit	put_calcul(t_map map, t_player player, char *str);
 //calculs.c
 t_wallhit	calcule_dist_exception(t_map map, t_player player);
-t_wallhit	calcule_dist(t_map map, t_player player, long double angle);
+t_wallhit	calcule_dist(t_map map, t_player player, double angle);
 void		printmap(char **map);
 
 int			initmlx(t_data *data);
@@ -38,7 +38,7 @@ int			create_base_image(t_color f, t_color ceil, void *mlx, t_data *d);
 int			ft_key(int key, t_data *data);
 int			ft_mov(t_map map, t_player *player, int key);
 void		ft_putdist_wall(t_wallhit distance, t_player *player);
-void		ft_putmov(t_map map, t_player *player, long double angle);
+void		ft_putmov(t_map map, t_player *player, double angle);
 void		ft_rotation(t_player *player, char c);
 
 //clear.c
@@ -50,5 +50,5 @@ int			ft_destroy_data(t_data *data);
 
 void		printrevsplit(char **split);
 void		change_image(t_data *data);
-void		rewriteline(t_data *data, int x, long double height, t_wallhit wall);
+void		rewriteline(t_data *data, int x, double height, t_wallhit wall);
 #endif

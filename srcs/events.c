@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
+/*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/25 21:16:53 by ccravero         ###   ########.fr       */
+/*   Updated: 2023/11/26 11:48:18 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	ft_putdist_wall(t_wallhit distance, t_player *player)
 		player->posy = distance.y;
 }
 
-void	ft_putmov(t_map map, t_player *player, long double angle)
+void	ft_putmov(t_map map, t_player *player, double angle)
 {
 	t_wallhit	distance;
 
 	player->angle = angle;
 	distance = calcule_dist(map, *player, 0);
-	printf("distance.dist = %Lf\n", distance.dist);
-	printf("distance.x = %Lf\n", distance.x);
-	printf("distance.y = %Lf\n", distance.y);
+	printf("distance.dist = %f\n", distance.dist);
+	printf("distance.x = %f\n", distance.x);
+	printf("distance.y = %f\n", distance.y);
 	if (distance.dist <= 0.21)
 		return;
 	else
@@ -55,7 +55,7 @@ void	ft_putmov(t_map map, t_player *player, long double angle)
 
 void	ft_rotation(t_player *player, char c)
 {
-	long double	rotation;
+	double	rotation;
 
 	rotation = M_PI / 30;
 	if (player->angle >= 2 * M_PI)
@@ -73,7 +73,7 @@ void	ft_rotation(t_player *player, char c)
 
 int	ft_mov(t_map map, t_player *player, int key)
 {
-	long double	prevangle;
+	double	prevangle;
 
 	prevangle = player->angle;
 	if (key == 'w')
@@ -107,8 +107,8 @@ int	ft_key(int key, t_data *data)
 		data -> player.angle = 0;
 	if (ft_mov(data->map, &(data->player), key))
 		change_image(data);
-	// printf("angle = %Lf\n", data->player.angle);
-	// printf("posx = %Lf\n", data->player.posx);
-	// printf("posy = %Lf\n", data->player.posy);
+	// printf("angle = %f\n", data->player.angle);
+	// printf("posx = %f\n", data->player.posx);
+	// printf("posy = %f\n", data->player.posy);
 	return (0);
 }

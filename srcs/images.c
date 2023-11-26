@@ -3,14 +3,14 @@
 #include "readFile.h"
 
 
-int selectcolor(t_data *data, t_wallhit wall, long double step);
-t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step);
+int selectcolor(t_data *data, t_wallhit wall, double step);
+t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step);
 
 void printwallhit(t_wallhit wh)
 {
-    printf("wallhit.x = %Lf\n", wh.x);
-    printf("wallhit.y = %Lf\n", wh.y);
-    printf("wallhit.dist = %Lf\n", wh.dist);
+    printf("wallhit.x = %f\n", wh.x);
+    printf("wallhit.y = %f\n", wh.y);
+    printf("wallhit.dist = %f\n", wh.dist);
     printf("wallhit.mur = %c\n", wh.mur);
 }
 
@@ -133,14 +133,14 @@ int initmlx(t_data *data)
 void change_image(t_data *data)
 {
     t_wallhit distance[640];
-    long double height;
+    double height;
     int x = 0;
-    long double PI = M_PI / 6.1;
+    double PI = M_PI / 6.1;
 
 	while (x < 640)
 	{
 		distance[x] = calcule_dist(data->map, data->player, PI);
-		distance[x].dist = distance[x].dist * cosl(PI);
+		distance[x].dist = distance[x].dist * cos(PI);
 		x++;
 		PI -= (M_PI / 3) / 640.0;
 	}
@@ -160,7 +160,7 @@ void change_image(t_data *data)
     mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
 }
 
-void	rewriteline(t_data *data, int x, long double height,t_wallhit wall)
+void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
 {
     int		y;
     char	*pixel;
@@ -188,10 +188,10 @@ void	rewriteline(t_data *data, int x, long double height,t_wallhit wall)
 }
 
 
-t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step)
+t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
 {
     t_wallhit texture_coordinate;
-    static long double	y;
+    static double	y;
     
     if (!data)
 	{
@@ -212,7 +212,7 @@ t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step)
     return (texture_coordinate);
 }
 
-int selectcolor(t_data *data, t_wallhit wall, long double step)
+int selectcolor(t_data *data, t_wallhit wall, double step)
 {
     int color;
     char *pixel;

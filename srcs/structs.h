@@ -15,11 +15,11 @@
 
 typedef struct s_player
 {
-	long double	posx;
-	long double	posy;
-	long double	angle;
-	long double	cosinus;
-	long double	sinus;
+	double	posx;
+	double	posy;
+	double	angle;
+	double	cosinus;
+	double	sinus;
 }	t_player;
 
 typedef struct s_color
@@ -45,9 +45,9 @@ typedef struct s_pair
 
 typedef struct s_wallhit
 {
-	long double	dist;
-	long double	x;
-	long double	y;
+	double	dist;
+	double	x;
+	double	y;
 	int			mur;
 }	t_wallhit;
 
