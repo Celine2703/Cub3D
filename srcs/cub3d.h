@@ -31,8 +31,10 @@ t_wallhit	calcule_dist_exception(t_map map, t_player player);
 t_wallhit	calcule_dist(t_map map, t_player player, long double angle);
 void		printmap(char **map);
 
-//images.c
+//initmlx.c
+int			textures_to_mlx(t_data *data);
 int			initmlx(t_data *data);
+//images.c
 int			create_base_image(t_color f, t_color ceil, void *mlx, t_data *d);
 int			selectcolor(t_data *data, t_wallhit wall, long double step);
 t_wallhit	create_texture_coord(t_data *d, t_wallhit wall, long double step);
