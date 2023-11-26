@@ -213,12 +213,12 @@ int	checkmap(t_data *dt)
 			{
 				if (i == 0 || i == dt->map.map_height - 1
 					|| j == 0 || j == dt->map.map_width - 1)
-					return (printf("Error 216\n"));
+					return (printf("Error 216 : '0' in the border of the map \n"));
 				if ((dt->map.tab[i + 1][j] != '0' && dt->map.tab[i + 1][j] != '1')
 					|| (dt->map.tab[i - 1][j] != '0' && dt->map.tab[i - 1][j] != '1')
 					|| (dt->map.tab[i][j + 1] != '0' && dt->map.tab[i][j + 1] != '1')
 					|| (dt->map.tab[i][j - 1] != '0' && dt->map.tab[i][j - 1] != '1'))
-					return (printf("Error 221 : empty zone near a space\n"));
+					return (printf("Error 221 : '0' not circled by '0' or '1'\n"));
 			}
 			j++;
 		}
