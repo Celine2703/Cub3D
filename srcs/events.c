@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/26 12:24:54 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:18:12 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_putdist_wall(t_wallhit distance, t_player *player)
 {	
-	if (floor(distance.x) != floor (player->posx) )
+	if (floor(distance.x) != floor(player->posx))
 	{
 		if (distance.x > player->posx)
 			player->posx = distance.x + 0.01;
@@ -24,7 +24,8 @@ void	ft_putdist_wall(t_wallhit distance, t_player *player)
 	}
 	else
 		player->posx = distance.x;
-	if (distance.y == floor(distance.y)|| distance.y == ceil(distance.y) -0.001)
+	if (distance.y == floor(distance.y)
+		|| distance.y == ceil(distance.y) - 0.001)
 	{
 		if (distance.y > player->posy)
 			player->posy = distance.y + 0.01;
@@ -38,13 +39,11 @@ void	ft_putdist_wall(t_wallhit distance, t_player *player)
 void	ft_putmov(t_map map, t_player *player, long double angle)
 {
 	t_wallhit	distance;
+
 	player->angle = angle;
 	distance = calcule_dist(map, *player, 0);
-	// printf("distance.dist = %Lf\n", distance.dist);
-	// printf("distance.x = %Lf\n", distance.x);
-	// printf("distance.y = %Lf\n", distance.y);
 	if (distance.dist <= 0.20)
-		return;
+		return ;
 	else
 	{
 		player->posx += 0.2 * cosl(angle);

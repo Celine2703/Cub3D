@@ -48,7 +48,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse_error(&data))
 		return (1);
-	// printinfo(data);
 	if (parse_map(&data))
 		ft_destroy_data(&data);
 	printinfo(data);

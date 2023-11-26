@@ -26,3 +26,5 @@ idem map3, map2
 
 ./cub3D Map/map.cub 
 Error
+
+clean printf

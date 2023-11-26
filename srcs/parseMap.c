@@ -13,25 +13,6 @@
 #include "readFile.h"
 #include "cub3d.h"
 
-// void replace_spaceandplayer(t_data *data);
-
-void	printrevsplit(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i] != NULL)
-		i++;
-	while (i >= 0)
-	{
-		if (split[i] != NULL)
-			printf("%d : %s\n", i, split[i]);
-		else
-			printf("%d : 0123456789\n", i);
-		i--;
-	}
-}
-
 int	parse_map(t_data *data)
 {
 	t_pair	lines;
@@ -42,27 +23,20 @@ int	parse_map(t_data *data)
 		printf("Error 42 : erreur dans l'importation de la map\n");
 		return (-1);
 	}
-	printf("start %d  end %d\n", lines.first, lines.second);
 	longest_line = find_longest(data->file, lines);
-	printf("longest %d\n", longest_line);
 	data->map.map_height = lines.second - lines.first + 1;
 	data->map.map_width = longest_line;
-	printf("height %d\n", data->map.map_height);
-	printf("width %d\n", data->map.map_width);
 	if (find_copy_map(data, lines) == -1)
 	{
 		printf("Error 54\n");
 		return (-1);
 	}
 	reverse_map(data->map);
-	// printf("error 58\n");
 	printsplit(data->map.tab);
-	printrevsplit(data->map.tab);
+	// printrevsplit(data->map.tab);
 	replace_player(data);
 	if (checkmap(data))
-	{
 		return (-1);
-	}
 	replacespace(data);
 	return (0);
 }
@@ -145,103 +119,19 @@ int	find_longest(char **file, t_pair lines)
 	return (longest_line);
 }
 
-int	ft_startmap(char **file, t_pair *lines)
-{
-	int		i;
-	char	*line;
-	int		emptyline;
+// void	printrevsplit(char **split)
+// {
+// 	int	i;
 
-	emptyline = 0;
-	lines->first = -1;
-	i = 0;
-	while (file[i] != NULL)
-	{
-		line = deletewhitespace(file[i]);
-		if (whichline(file[i]) == -1)
-		{
-			if (emptyline == 1)
-				return (free (line), -2);
-			if (lines->first == -1)
-				lines->first = i;
-			lines->second = i;
-		}
-		if (whichline(file[i]) == 7 && lines->first >= 0)
-			emptyline = 1;
-		free(line);
-		i++;
-	}
-	if (lines->first == -1)
-		return (-1);
-	return (0);
-}
-
-void	reverse_map(t_map map)
-{
-	int		start;
-	int		end;
-	char	*tmp;
-
-	start = 0;
-	end = map.map_height - 1;
-	while (start <= end)
-	{
-		tmp = map.tab[start];
-		map.tab[start] = map.tab[end];
-		map.tab[end] = tmp;
-		start++;
-		end--;
-	}
-}
-
-int	checkmap(t_data *dt)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (dt->map.tab[i])
-	{
-		j = 0;
-		while (dt->map.tab[i][j])
-		{
-			if (dt->map.tab[i][j] != '0' && dt->map.tab[i][j] != '1'
-				&& dt->map.tab[i][j] != '2' && dt->map.tab[i][j] != 'N'
-				&& dt->map.tab[i][j] != 'S' && dt->map.tab[i][j] != 'E'
-				&& dt->map.tab[i][j] != 'W' && dt->map.tab[i][j] != ' ')
-				return (printf("Error 212 invalid char in map : %d\n", dt->map.tab[i][j]));
-			if (dt->map.tab[i][j] == '0' )
-			{
-				if (i == 0 || i == dt->map.map_height - 1
-					|| j == 0 || j == dt->map.map_width - 1)
-					return (printf("Error 216\n"));
-				if ((dt->map.tab[i + 1][j] != '0' && dt->map.tab[i + 1][j] != '1')
-					|| (dt->map.tab[i - 1][j] != '0' && dt->map.tab[i - 1][j] != '1')
-					|| (dt->map.tab[i][j + 1] != '0' && dt->map.tab[i][j + 1] != '1')
-					|| (dt->map.tab[i][j - 1] != '0' && dt->map.tab[i][j - 1] != '1'))
-					return (printf("Error 221 : empty zone near a space\n"));
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	replacespace(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (data->map.tab[i])
-	{
-		j = 0;
-		while (j < data->map.map_width)
-		{
-			if (data->map.tab[i][j] == ' ' || data->map.tab[i][j] == 0)
-				data->map.tab[i][j] = '1';
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (split[i] != NULL)
+// 		i++;
+// 	while (i >= 0)
+// 	{
+// 		if (split[i] != NULL)
+// 			printf("%d : %s\n", i, split[i]);
+// 		else
+// 			printf("%d : 0123456789\n", i);
+// 		i--;
+// 	}
+// }
