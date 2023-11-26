@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/26 15:45:14 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:34:03 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,6 @@ int	ft_mov(t_map map, t_player *player, int key)
 
 int	ft_key(int key, t_data *data)
 {
-	printf("angle = %Lf\n", data->player.angle);
-	printf("posx = %Lf\n", data->player.posx);
-	printf("posy = %Lf\n", data->player.posy);
 	if (key == 65307)
 		ft_destroy_data(data);
 	if (data -> player.angle == 2 * M_PI)
