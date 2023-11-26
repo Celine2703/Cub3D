@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/26 14:18:12 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 15:45:14 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_rotation(t_player *player, char c)
 {
 	long double	rotation;
 
-	rotation = M_PI / 30;
+	rotation = M_PI / 20;
 	if (player->angle >= 2 * M_PI)
 		player->angle = 0;
 	if (c == 'd')

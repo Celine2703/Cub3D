@@ -60,6 +60,7 @@ void		reverse_map(t_map map);
 
 long double	select_direction(char dir);
 int			replace_player(t_data *data);
+int			test_checkmap(t_data *d, int i, int j);
 int			checkmap(t_data *data);
 void		replacespace(t_data *data);
 

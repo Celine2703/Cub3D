@@ -14,58 +14,6 @@
 #include "../minilibx-linux/mlx.h"
 #include "readFile.h"
 
-int	initmlx(t_data *data)
-{
-	int	taille;
-
-	taille = 64;
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
-		return (1);
-	data->win = mlx_new_window(data->mlx, 640, 640, "CUB3D");
-	if (data->win == NULL)
-		return (1);
-	create_base_image (data->floor, data->ceiling, data->mlx, data);
-	data->textures[0].image = mlx_xpm_file_to_image(data->mlx, data->east, &taille, &taille);
-	if (data->textures[0].image == NULL)
-	{
-		printf("error texture\n");
-		return (1);
-	}
-	data->textures[0].addr = mlx_get_data_addr(data->textures[0].image, &data->textures[0].bpp, &data->textures[0].sizeline, &data->textures[0].endian);
-	data->textures[1].image = mlx_xpm_file_to_image(data->mlx, data->west, &taille, &taille);
-	if (data->textures[1].image == NULL)
-	{
-		printf("error texture\n");
-		return (1);
-	}
-	data->textures[1].addr = mlx_get_data_addr(data->textures[1].image, &data->textures[1].bpp, &data->textures[1].sizeline, &data->textures[1].endian);
-	data->textures[2].image = mlx_xpm_file_to_image(data->mlx, data->north, &taille, &taille);
-	if (data->textures[2].image == NULL)
-	{
-		printf("error texture\n");
-		return (1);
-	}
-	data->textures[2].addr = mlx_get_data_addr(data->textures[2].image, &data->textures[2].bpp, &data->textures[2].sizeline, &data->textures[2].endian);
-	data->textures[3].image = mlx_xpm_file_to_image(data->mlx, data->south, &taille, &taille);
-	if (data->textures[3].image == NULL)
-	{
-		printf("error texture\n");
-		return (1);
-	}
-	data->textures[3].addr = mlx_get_data_addr(data->textures[3].image, &data->textures[3].bpp, &data->textures[3].sizeline, &data->textures[3].endian);
-	if (data->textures[0].image == NULL || data->textures[1].image == NULL || data->textures[2].image == NULL || data->textures[3].image == NULL)
-	{
-		printf("error texture\n");
-		return (1);
-	}
-	mlx_hook(data->win, 02, 1L << 0, ft_key, data);
-	mlx_hook(data->win, 17, 0, ft_destroy_data, data);
-	change_image(data);
-	mlx_loop(data->mlx);
-	return (0);
-}
-
 void	change_image(t_data *data)
 {
 	t_wallhit	distance[640];
@@ -107,7 +55,8 @@ void	rewriteline(t_data *data, int x, long double height, t_wallhit wall)
 	}
 	while (y < 640)
 	{
-		pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
+		pixel = data->base.addr + y * data->base.sizeline
+			+ x * data->base.bpp / 8;
 		if (y > (640.0 / 2.0 + height))
 			*(int *) pixel = data->ceiling.color;
 		else if (y < (640.0 / 2.0 - height))
@@ -173,14 +122,16 @@ int	create_base_image(t_color floor, t_color ceiling, void *mlx, t_data *data)
 	data->base.image = mlx_new_image(mlx, 640, 640);
 	if (data->base.image == NULL)
 		return (1);
-	data->base.addr = mlx_get_data_addr(data->base.image, &data->base.bpp, &data->base.sizeline, &data->base.endian);
+	data->base.addr = mlx_get_data_addr(data->base.image,
+			&data->base.bpp, &data->base.sizeline, &data->base.endian);
 	y = 0;
 	while (y < 640)
 	{
 		x = 0;
 		while (x < 640)
 		{
-			pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
+			pixel = data->base.addr + y * data->base.sizeline
+				+ x * data->base.bpp / 8;
 			*(int *) pixel = floor.color;
 			if (y > (640 / 2))
 				*(int *) pixel = ceiling.color;
@@ -188,15 +139,6 @@ int	create_base_image(t_color floor, t_color ceiling, void *mlx, t_data *data)
 		}
 		y++;
 	}
-	return (0);
-}
-
-int	changepixel(int x, int y, t_color color, t_data *data)
-{
-	char	*pixel;
-
-	pixel = data->base.addr + y * data->base.sizeline + x * data->base.bpp / 8;
-	*(int *)pixel = color.color;
 	return (0);
 }
 

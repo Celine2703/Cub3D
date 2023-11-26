@@ -33,7 +33,6 @@ int	parse_map(t_data *data)
 	}
 	reverse_map(data->map);
 	printsplit(data->map.tab);
-	// printrevsplit(data->map.tab);
 	replace_player(data);
 	if (checkmap(data))
 		return (-1);
