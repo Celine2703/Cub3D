@@ -26,7 +26,7 @@ int	parsefile(t_data *data)
 		line = deletewhitespace(data->file[lineread]);
 		type = whichline(line);
 		if (type == -1 && nb != 6)
-			return (free(line), lineread + 1);
+			return (free(line), printf("Error 42 : ligne %d\n", lineread + 1));
 		else if (type <= 4 && ++nb && readpath(type, line, data) == -1)
 			return (free(line), lineread + 1);
 		else if (type == 5 && ++nb && getcolor(line, &data->ceiling))

@@ -28,11 +28,10 @@ int	parse_map(t_data *data)
 	data->map.map_width = longest_line;
 	if (find_copy_map(data, lines) == -1)
 	{
-		printf("Error 54\n");
+		printf("Error 31  : \n");
 		return (-1);
 	}
 	reverse_map(data->map);
-	printsplit(data->map.tab);
 	replace_player(data);
 	if (checkmap(data))
 		return (-1);
