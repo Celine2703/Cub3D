@@ -64,7 +64,9 @@ int	parse_error(t_data *data)
 	// printf("err111or");
 	if (error != 0)
 	{
-		if (missinfo(*data) == 0)
+		if (error == -1)
+			printf("Error 68 : file too small, not enough line");
+		else if (missinfo(*data) == 0)
 			printf("Error : line %d", error);
 		ft_destroy_data(data);
 		return (1);

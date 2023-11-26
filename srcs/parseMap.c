@@ -39,7 +39,7 @@ int	parse_map(t_data *data)
 
 	if (ft_startmap(data->file, &lines))
 	{
-		printf("Error\n");
+		printf("Error 42 : erreur dans l'importation de la map\n");
 		return (-1);
 	}
 	printf("start %d  end %d\n", lines.first, lines.second);
@@ -51,29 +51,19 @@ int	parse_map(t_data *data)
 	printf("width %d\n", data->map.map_width);
 	if (find_copy_map(data, lines) == -1)
 	{
-		printf("GORRRRRRRRRRRRRRRRRRRRRRRRRRR Error\n");
+		printf("Error 54\n");
 		return (-1);
 	}
 	reverse_map(data->map);
-	printf("LAAAAAAAAAAAAAAAAAA\n");
+	// printf("error 58\n");
 	printsplit(data->map.tab);
 	printrevsplit(data->map.tab);
 	replace_player(data);
-	checkmap(data);
+	if (checkmap(data))
+	{
+		return (-1);
+	}
 	replacespace(data);
-	// printsplit(data->map.tab);
-	// printrevsplit(data->map.tab);
-
-	// printf("la\n");
-	// on obtient le nb de ligne de la map
-	// on obtient la largeur de la map (la plus grande ligne)
-	// on alloue la map
-	// on copie les lignes de la map dans la map
-	
-	// on verifie la validite de tous les caracteres de la map (0, 1,' ', N, S, E, W)
-	// on transforme les caracteres N, S, E, W en 0 et on enregistre la position du joueur
-	// on transforme les ' ' en 1
-	// on verifie que la map est entouree de 1 (donc chaque 0 
 	return (0);
 }
 
@@ -214,16 +204,21 @@ int	checkmap(t_data *dt)
 		j = 0;
 		while (dt->map.tab[i][j])
 		{
+			if (dt->map.tab[i][j] != '0' && dt->map.tab[i][j] != '1'
+				&& dt->map.tab[i][j] != '2' && dt->map.tab[i][j] != 'N'
+				&& dt->map.tab[i][j] != 'S' && dt->map.tab[i][j] != 'E'
+				&& dt->map.tab[i][j] != 'W' && dt->map.tab[i][j] != ' ')
+				return (printf("Error 212 invalid char in map : %d\n", dt->map.tab[i][j]));
 			if (dt->map.tab[i][j] == '0' )
 			{
 				if (i == 0 || i == dt->map.map_height - 1
 					|| j == 0 || j == dt->map.map_width - 1)
-					return (printf("Error\n"));
+					return (printf("Error 221\n"));
 				if ((dt->map.tab[i + 1][j] != '0' && dt->map.tab[i + 1][j] != '1')
 					|| (dt->map.tab[i - 1][j] != '0' && dt->map.tab[i - 1][j] != '1')
 					|| (dt->map.tab[i][j + 1] != '0' && dt->map.tab[i][j + 1] != '1')
 					|| (dt->map.tab[i][j - 1] != '0' && dt->map.tab[i][j - 1] != '1'))
-					return (printf("Error\n"));
+					return (printf("Error 222\n"));
 			}
 			j++;
 		}

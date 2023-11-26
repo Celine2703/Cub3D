@@ -36,5 +36,7 @@ int	parsefile(t_data *data)
 		free(line);
 		lineread++;
 	}
+	if (lineread < 8)
+		return (-1);
 	return (0);
 }
