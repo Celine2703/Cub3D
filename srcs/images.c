@@ -141,31 +141,3 @@ int	create_base_image(t_color floor, t_color ceiling, void *mlx, t_data *data)
 	}
 	return (0);
 }
-
-// void printwallhit(t_wallhit wh)
-// {
-//     printf("wallhit.x = %Lf\n", wh.x);
-//     printf("wallhit.y = %Lf\n", wh.y);
-//     printf("wallhit.dist = %Lf\n", wh.dist);
-//     printf("wallhit.mur = %c\n", wh.mur);
-// }
-
-// void printmappos(t_data data)
-// {
-//     int i = data.map.map_height - 1;
-//     int j = 0;
-//     while (i >= 0)
-//     {
-//         j = 0;
-//         while (j < data.map.map_width)
-//         {
-//             if (i == (int)data.player.posy && j == (int)data.player.posx)
-//                 printf("P");
-//             else
-//                 printf("%c", data.map.tab[i][j]);
-//             j++;
-//         }
-//         printf("\n");
-//         i--;
-//     }
-// }

@@ -34,15 +34,3 @@ void	freesplit(char **split)
 	}
 	free(split);
 }
-
-void	printsplit(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i] != NULL)
-	{
-		printf("%d : %s\n", i, split[i]);
-		i++;
-	}
-}

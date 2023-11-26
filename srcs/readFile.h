@@ -45,7 +45,6 @@ int			readpath(int type, char *line, t_data *data);
 // splitUtils.c
 int			sizesplit(char **split);
 void		freesplit(char **split);
-void		printsplit(char **split);
 
 // errors_utils.c
 int			print_error_color(char c);

@@ -53,15 +53,3 @@ t_wallhit	calcule_dist(t_map map, t_player player, long double angle)
 		return (dist_h);
 	}
 }
-
-void	printmap(char **map)
-{
-	int	i;
-
-	i = 4;
-	while (i >= 0)
-	{
-		printf("%s\n", map[i]);
-		i--;
-	}
-}

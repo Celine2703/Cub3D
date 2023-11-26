@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include <unistd.h>
-# include <stdlib.h>
+// # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
 # include "structs.h"
@@ -29,7 +29,6 @@ t_wallhit	put_calcul(t_map map, t_player player, char *str);
 //calculs.c
 t_wallhit	calcule_dist_exception(t_map map, t_player player);
 t_wallhit	calcule_dist(t_map map, t_player player, long double angle);
-void		printmap(char **map);
 
 //initmlx.c
 int			textures_to_mlx(t_data *data);
