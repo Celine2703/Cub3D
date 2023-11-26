@@ -30,13 +30,6 @@ void	ft_mapclear(t_map *map)
 	free(map ->tab);
 }
 
-void	ft_stop(t_map *map, void *mlx)
-{
-	ft_mapclear(map);
-	// mlx_destroy_display(mlx);
-	free(mlx);
-}
-
 void	checkfree(void *ptr)
 {
 	if (ptr)
@@ -49,8 +42,6 @@ int	ft_destroy_data(t_data *data)
 
 	if (data->file)
 		freesplit(data->file);
-	// checkfree(data->image.image);
-	// checkfree(data->img.addr);
 	if (data->map.tab)
 		ft_mapclear(&data->map);
 	checkfree(data->north);
@@ -61,7 +52,7 @@ int	ft_destroy_data(t_data *data)
 		mlx_destroy_image(data->mlx, data->base.image);
 	i = 0;
 	while (data->textures[i].image)
-			mlx_destroy_image(data->mlx, data->textures[i++].image);
+		mlx_destroy_image(data->mlx, data->textures[i++].image);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)

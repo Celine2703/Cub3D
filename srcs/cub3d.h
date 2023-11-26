@@ -45,7 +45,6 @@ void		ft_rotation(t_player *player, char c);
 void		ft_mapclear(t_map *map);
 void		ft_playerclear(t_player *player);
 void		ft_dataclear(t_data *data);
-void		ft_stop(t_map *map, void *mlx);
 int			ft_destroy_data(t_data *data);
 
 void		printrevsplit(char **split);

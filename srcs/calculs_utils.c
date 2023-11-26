@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:38:10 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/26 12:40:40 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 13:03:46 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ t_wallhit	calcule_horizontal(t_map map, t_player p, char c)
 	if (c == 'E')
 		w.mur = 'O';
 	else
-	{
 		w.mur = 'E';
-	}
-	
 	w.dist = sqrt(pow(p.posx - w.x, 2) + pow(p.posy - w.y, 2));
 	return (w);
 }
@@ -100,9 +97,7 @@ t_wallhit	calcule_vertical(t_map map, t_player p, char c)
 	if (c == 'N')
 		w.mur = 'S';
 	else
-	{
 		w.mur = 'N';
-	}
 	w.dist = sqrt(pow(p.posx - w.x, 2) + pow(p.posy - w.y, 2));
 	return (w);
 }
@@ -114,14 +109,6 @@ t_wallhit	put_calcul(t_map map, t_player player, char *str)
 
 	dist_v = calcule_vertical(map, player, str[0]);
 	dist_h = calcule_horizontal(map, player, str[1]);
-	if (dist_v.dist > 1000 && dist_h.dist > 1000)
-	{
-		printf("both dist > 1000\n");
-		// printf("dist_v.dist = %Lf, dist_h.dist = %Lf\n", dist_v.dist, dist_h.dist);
-		// printf("dist_v.x = %Lf, dist_v.y = %Lf\n", dist_v.x, dist_v.y);
-		// printf("dist_h.x = %Lf, dist_h.y = %Lf\n", dist_h.x, dist_h.y);
-		// printf("player.posx = %Lf, player.posy = %Lf\n, player.angle", player.posx, player.posy);
-	}
 	if (dist_v.dist < dist_h.dist)
 		return (dist_v);
 	else
