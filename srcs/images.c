@@ -228,7 +228,6 @@ int selectcolor(t_data *data, t_wallhit wall, long double step)
     
 	color = *(int*)pixel;
 	return (color);
-    
 }
 
 int create_base_image (t_color floor, t_color ceiling, void *mlx, t_data *data) 
