@@ -106,7 +106,7 @@ int	replace_player(t_data *data)
 	return (err);
 }
 
-double	select_direction(char dir)
+long double	select_direction(char dir)
 {
 	if (dir == 'N')
 		return (M_PI / 2);

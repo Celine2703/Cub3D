@@ -3,14 +3,14 @@
 #include "readFile.h"
 
 
-int selectcolor(t_data *data, t_wallhit wall, double step);
-t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step);
+int selectcolor(t_data *data, t_wallhit wall, long double step);
+t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step);
 
 void printwallhit(t_wallhit wh)
 {
-    printf("wallhit.x = %f\n", wh.x);
-    printf("wallhit.y = %f\n", wh.y);
-    printf("wallhit.dist = %f\n", wh.dist);
+    printf("wallhit.x = %Lf\n", wh.x);
+    printf("wallhit.y = %Lf\n", wh.y);
+    printf("wallhit.dist = %Lf\n", wh.dist);
     printf("wallhit.mur = %c\n", wh.mur);
 }
 
@@ -82,9 +82,9 @@ int initmlx(t_data *data)
         printf("error texture\n");
         return 1;
     }
-    // printf("angle in image = %f\n", data->player.angle);
-    // printf("dist.x : %f\n", calcule_dist(data->map.tab, data->player,0).x);
-    // printf("dist.y : %f\n", calcule_dist(data->map.tab, data->player,0).y);
+    // printf("angle in image = %Lf\n", data->player.angle);
+    // printf("dist.x : %Lf\n", calcule_dist(data->map.tab, data->player,0).x);
+    // printf("dist.y : %Lf\n", calcule_dist(data->map.tab, data->player,0).y);
     // change_image(data);
     mlx_hook(data->win, 02, 1L << 0, ft_key, data);
     mlx_hook(data->win, 17, 0, ft_destroy_data, data);
@@ -120,7 +120,7 @@ int initmlx(t_data *data)
     // data->player= player;
     // calcule_vertical(data->map, data->player);
     // // t_wallhit distance = calcule_dist(data->map, player, M_PI/30);
-    // printf ("calculdist = %f\n", distance.dist);
+    // printf ("calculdist = %Lf\n", distance.dist);
     // printmappos(*data);
     // printrevsplit(data->map.tab);
     // t_wallhit distanceeast = calcule_dist(data->map, data->player,0);
@@ -133,25 +133,25 @@ int initmlx(t_data *data)
 void change_image(t_data *data)
 {
     t_wallhit distance[640];
-    double height;
+    long double height;
     int x = 0;
-    double PI = M_PI / 6.1;
+    long double PI = M_PI / 6.1;
 
 	while (x < 640)
 	{
 		distance[x] = calcule_dist(data->map, data->player, PI);
-		distance[x].dist = distance[x].dist * cos(PI);
+		distance[x].dist = distance[x].dist * cosl(PI);
 		x++;
 		PI -= (M_PI / 3) / 640.0;
 	}
 	x = 0;
     while (x < 640)
     {
-        if (x != 0 && x != 639 && distance[x-1].mur != distance[x].mur && distance[x - 1].mur == distance[x + 1].mur)
-		{
-			printf("coucou\n");
-			distance[x].mur = distance[x - 1].mur;
-		}
+        // if (x != 0 && x != 639 && distance[x-1].mur != distance[x].mur && distance[x - 1].mur == distance[x + 1].mur)
+		// {
+		// 	printf("coucou\n");
+		// 	distance[x].mur = distance[x - 1].mur;
+		// }
         height = 320/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
         x++;
@@ -160,7 +160,7 @@ void change_image(t_data *data)
     mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
 }
 
-void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
+void	rewriteline(t_data *data, int x, long double height,t_wallhit wall)
 {
     int		y;
     char	*pixel;
@@ -188,10 +188,10 @@ void	rewriteline(t_data *data, int x, double height,t_wallhit wall)
 }
 
 
-t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
+t_wallhit create_texture_coord(t_data * data, t_wallhit wall, long double step)
 {
     t_wallhit texture_coordinate;
-    static double	y;
+    static long double	y;
     
     if (!data)
 	{
@@ -212,7 +212,7 @@ t_wallhit create_texture_coord(t_data * data, t_wallhit wall, double step)
     return (texture_coordinate);
 }
 
-int selectcolor(t_data *data, t_wallhit wall, double step)
+int selectcolor(t_data *data, t_wallhit wall, long double step)
 {
     int color;
     char *pixel;

@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:38:10 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/26 11:48:18 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 12:11:10 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "readFile.h"
 #include <string.h>
 
-double	calcule_y(t_player player, double x)
+long double	calcule_y(t_player player, long double x)
 {
-	double	adjacent;
-	double	oppose;
+	long double	adjacent;
+	long double	oppose;
 
 	if (player.cosinus == 0)
 		return (0);
-	adjacent = fabs(x - player.posx);
+	adjacent = fabsl(x - player.posx);
 	oppose = (adjacent / player.cosinus) * player.sinus;
 	if (player.angle < M_PI / 2 || player.angle > 3 * M_PI / 2)
 		return (oppose);
@@ -29,14 +29,14 @@ double	calcule_y(t_player player, double x)
 		return (-oppose);
 }
 
-double	calcule_x(t_player player, double y)
+long double	calcule_x(t_player player, long double y)
 {
-	double	adjacent;
-	double	oppose;
+	long double	adjacent;
+	long double	oppose;
 
 	if (player.sinus == 0)
 		return (0);
-	adjacent = fabs(y - player.posy);
+	adjacent = fabsl(y - player.posy);
 	oppose = (adjacent / player.sinus) * player.cosinus;
 	if (player.angle > 0 && player.angle < M_PI)
 		return (oppose);
@@ -68,7 +68,11 @@ t_wallhit	calcule_horizontal(t_map map, t_player p, char c)
 	if (c == 'E')
 		w.mur = 'O';
 	else
+	{
 		w.mur = 'E';
+		w.x += 0.001;
+	}
+	
 	w.dist = sqrt(pow(p.posx - w.x, 2) + pow(p.posy - w.y, 2));
 	return (w);
 }
@@ -97,7 +101,10 @@ t_wallhit	calcule_vertical(t_map map, t_player p, char c)
 	if (c == 'N')
 		w.mur = 'S';
 	else
+	{
 		w.mur = 'N';
+		w.y += 0.001;
+	}
 	w.dist = sqrt(pow(p.posx - w.x, 2) + pow(p.posy - w.y, 2));
 	return (w);
 }
@@ -112,10 +119,10 @@ t_wallhit	put_calcul(t_map map, t_player player, char *str)
 	if (dist_v.dist > 1000 && dist_h.dist > 1000)
 	{
 		printf("both dist > 1000\n");
-		// printf("dist_v.dist = %f, dist_h.dist = %f\n", dist_v.dist, dist_h.dist);
-		// printf("dist_v.x = %f, dist_v.y = %f\n", dist_v.x, dist_v.y);
-		// printf("dist_h.x = %f, dist_h.y = %f\n", dist_h.x, dist_h.y);
-		// printf("player.posx = %f, player.posy = %f\n, player.angle", player.posx, player.posy);
+		// printf("dist_v.dist = %Lf, dist_h.dist = %Lf\n", dist_v.dist, dist_h.dist);
+		// printf("dist_v.x = %Lf, dist_v.y = %Lf\n", dist_v.x, dist_v.y);
+		// printf("dist_h.x = %Lf, dist_h.y = %Lf\n", dist_h.x, dist_h.y);
+		// printf("player.posx = %Lf, player.posy = %Lf\n, player.angle", player.posx, player.posy);
 	}
 	if (dist_v.dist < dist_h.dist)
 		return (dist_v);

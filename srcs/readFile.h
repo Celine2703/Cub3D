@@ -58,7 +58,7 @@ int			find_longest(char **file, t_pair lines);
 int			find_copy_map(t_data *data, t_pair lines);
 void		reverse_map(t_map map);
 
-double	select_direction(char dir);
+long double	select_direction(char dir);
 int			replace_player(t_data *data);
 int			checkmap(t_data *data);
 void		replacespace(t_data *data);
