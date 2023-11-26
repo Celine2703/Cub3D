@@ -6,4 +6,21 @@ d’erreur explicite de votre choix.
 
 verif erreurs de parsing
 
-trou dans les coins
+./cub3D Map/str_no_empty.cub 
+ceiling is missing
+
+./cub3D Map/str_map_no_empty.cub 
+Error
+je crois que c est le 0 tout seul en bas l erreur
+
+./cub3D Map/simplemap.cub       
+north is missing
+Normalement il  ne devrait pas y avoir d erreur 
+
+./cub3D Map/map4.cub
+couleurs plafond et sol inversees
+
+idem map3, map2
+
+./cub3D Map/map.cub 
+Error
