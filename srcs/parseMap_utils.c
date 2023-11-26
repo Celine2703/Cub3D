@@ -6,20 +6,18 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:32:20 by cmartin-          #+#    #+#             */
-/*   Updated: 2023/11/26 15:48:32 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:20:31 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readFile.h"
 #include "cub3d.h"
 
-int	ft_startmap(char **file, t_pair *lines)
+int	ft_startmap(char **file, t_pair *lines, int emptyline)
 {
 	int		i;
 	char	*line;
-	int		emptyline;
 
-	emptyline = 0;
 	lines->first = -1;
 	i = 0;
 	while (file[i] != NULL)

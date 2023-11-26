@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:06:59 by cmartin-          #+#    #+#             */
-/*   Updated: 2023/11/26 15:50:21 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:31:39 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 #include "../minilibx-linux/mlx.h"
 #include "readFile.h"
 
-int	initmlx(t_data *data)
+int	textures_to_mlx(t_data *data)
 {
 	int	t;
 	int	i;
 
 	i = 0;
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
-		return (1);
-	if (create_base_image (data->floor, data->ceiling, data->mlx, data))
-		return (1);
 	data->textures[0].image = mlx_xpm_file_to_image(data->mlx,
 			data->east, &t, &t);
 	data->textures[1].image = mlx_xpm_file_to_image(data->mlx,
@@ -42,6 +37,18 @@ int	initmlx(t_data *data)
 				&data->textures[i].endian);
 		i++;
 	}
+	return (0);
+}
+
+int	initmlx(t_data *data)
+{
+	data->mlx = mlx_init();
+	if (data->mlx == NULL)
+		return (1);
+	if (create_base_image (data->floor, data->ceiling, data->mlx, data))
+		return (1);
+	if (textures_to_mlx(data))
+		return (1);
 	data->win = mlx_new_window(data->mlx, 640, 640, "CUB3D");
 	if (data->win == NULL)
 		return (1);

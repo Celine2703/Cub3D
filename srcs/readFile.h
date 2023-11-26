@@ -53,7 +53,7 @@ int			missinfo(t_data data);
 
 // parseMap.c
 int			parse_map(t_data *data);
-int			ft_startmap(char **fil, t_pair *lines);
+int			ft_startmap(char **fil, t_pair *lines, int emptyline);
 int			find_longest(char **file, t_pair lines);
 int			find_copy_map(t_data *data, t_pair lines);
 void		reverse_map(t_map map);

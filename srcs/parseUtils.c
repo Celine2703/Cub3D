@@ -67,7 +67,7 @@ int	parse_error(t_data *data)
 		// else if (missinfo(*data) == 0)
 		// 	printf("Error : line %d", error);
 		else if (error == -2)
-		ft_destroy_data(data);
+			ft_destroy_data(data);
 		return (1);
 	}
 	if (missinfo(*data))

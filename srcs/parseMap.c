@@ -18,7 +18,7 @@ int	parse_map(t_data *data)
 	t_pair	lines;
 	int		longest_line;
 
-	if (ft_startmap(data->file, &lines))
+	if (ft_startmap(data->file, &lines, 0))
 	{
 		printf("Error 42 : erreur dans l'importation de la map\n");
 		return (-1);
