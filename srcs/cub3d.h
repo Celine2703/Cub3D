@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include <unistd.h>
-# include <stdlib.h>
+// # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
 # include "structs.h"
