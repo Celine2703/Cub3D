@@ -58,9 +58,9 @@ void	rewriteline(t_data *data, int x, long double height, t_wallhit wall)
 		pixel = data->base.addr + y * data->base.sizeline
 			+ x * data->base.bpp / 8;
 		if (y > (640.0 / 2.0 + height))
-			*(int *) pixel = data->ceiling.color;
-		else if (y < (640.0 / 2.0 - height))
 			*(int *) pixel = data->floor.color;
+		else if (y < (640.0 / 2.0 - height))
+			*(int *) pixel = data->ceiling.color;
 		else
 			*(int *)pixel = selectcolor(data, wall, 64.0 / (height * 2));
 		y++;
