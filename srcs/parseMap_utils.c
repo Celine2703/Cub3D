@@ -6,7 +6,7 @@
 /*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:32:20 by cmartin-          #+#    #+#             */
-/*   Updated: 2023/11/26 17:00:30 by ccravero         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:29:43 by ccravero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_startmap(char **file, t_pair *lines, int emptyline)
 	while (file[i] != NULL)
 	{
 		line = deletewhitespace(file[i]);
-		if (whichline(file[i]) == -1)
+		if (whichline(line) == -1)
 		{
 			if (emptyline == 1)
 				return (free (line), -2);
