@@ -29,9 +29,9 @@ int	parsefile(t_data *data)
 			return (free(line), lineread + 1);
 		else if (type <= 4 && ++nb && readpath(type, line, data) == -1)
 			return (free(line), lineread + 1);
-		else if (type == 5 && ++nb && getcolor(line, &data->ceiling) == -1)
+		else if (type == 5 && ++nb && getcolor(line, &data->ceiling))
 			return (free(line), lineread + 1);
-		else if (type == 6 && ++nb && getcolor(line, &data->floor) == -1)
+		else if (type == 6 && ++nb && getcolor(line, &data->floor))
 			return (free(line), lineread + 1);
 		free(line);
 		lineread++;

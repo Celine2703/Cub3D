@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseFile_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmartin <cmartin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 08:35:12 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/23 08:35:40 by cmartin          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:46:28 by ccravero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ int	getcolor(char *line, t_color *color)
 	while (split[i] != NULL)
 	{
 		if (isallnb(split[i]) == -1)
-			return (freesplit(split), -1);
+			return (freesplit(split), printf("Error : color not a number\n"));
 		nb = ft_atoi(split[i]);
 		if (nb < 0 || nb > 255)
-			return (freesplit(split), -1);
+			return (freesplit(split), printf("Error: color out of range\n"));
 		if (i == 0)
 			color->red = nb;
 		else if (i == 1)

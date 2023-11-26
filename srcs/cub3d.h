@@ -21,8 +21,8 @@
 # include "../minilibx-linux/mlx.h"
 
 //calculs_utils.c
-long double		calcule_y(t_player player, long double x);
-long double		calcule_x(t_player player, long double y);
+long double	calcule_y(t_player player, long double x);
+long double	calcule_x(t_player player, long double y);
 t_wallhit	calcule_horizontal(t_map map, t_player	player, char c);
 t_wallhit	calcule_vertical(t_map map, t_player	player, char c);
 t_wallhit	put_calcul(t_map map, t_player player, char *str);
@@ -47,7 +47,7 @@ void		ft_playerclear(t_player *player);
 void		ft_dataclear(t_data *data);
 int			ft_destroy_data(t_data *data);
 
-void		printrevsplit(char **split);
+// void		printrevsplit(char **split);
 void		change_image(t_data *data);
-void		rewriteline(t_data *data, int x, long double height, t_wallhit wall);
+void		rewriteline(t_data *data, int x, long double h, t_wallhit wall);
 #endif

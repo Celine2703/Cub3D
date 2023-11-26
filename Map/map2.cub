@@ -1,7 +1,7 @@
-NO /home/ccravero/Cub3D/image/textureN.xpm
-EA /home/ccravero/Cub3D/image/textureE.xpm
-SO /home/ccravero/Cub3D/image/textureS.xpm
-WE /home/ccravero/Cub3D/image/textureW.xpm
+NO ./image/textureN.xpm
+EA ./image/textureE.xpm
+SO ./image/textureS.xpm
+WE ./image/textureW.xpm
 
 F 220,100,0
 C 225,30,0
