@@ -6,6 +6,8 @@ d’erreur explicite de votre choix.
 
 verif erreurs de parsing
 
+lenteur pres des murs
+
 ./cub3D Map/str_no_empty.cub 
 ceiling is missing
 
