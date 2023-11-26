@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initmlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:06:59 by cmartin-          #+#    #+#             */
-/*   Updated: 2023/11/26 16:31:39 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:38:02 by ccravero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	initmlx(t_data *data)
 	data->win = mlx_new_window(data->mlx, 640, 640, "CUB3D");
 	if (data->win == NULL)
 		return (1);
-	mlx_hook(data->win, 02, 1L << 0, ft_key, data);
+	// mlx_hook(data->win, 02, 1L << 0, ft_key, data);
+	mlx_key_hook(data->win, ft_key, data);
 	mlx_hook(data->win, 17, 0, ft_destroy_data, data);
 	change_image(data);
 	mlx_loop(data->mlx);
