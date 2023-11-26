@@ -148,15 +148,9 @@ void change_image(t_data *data)
 	x = 0;
     while (x < 640)
     {
-        // if (x != 0 && x != 639 && distance[x-1].mur != distance[x].mur && distance[x - 1].mur == distance[x + 1].mur)
-		// {
-		// 	printf("coucou\n");
-		// 	distance[x].mur = distance[x - 1].mur;
-		// }
         height = 320/distance[x].dist;
         rewriteline(data, x, height,distance[x]);
         x++;
-        
 	}
     mlx_put_image_to_window(data->mlx, data->win, data->base.image, 0, 0);
 }
