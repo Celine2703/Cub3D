@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccravero <ccravero@students.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:32:20 by cmartin-          #+#    #+#             */
-/*   Updated: 2023/11/26 16:20:31 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:00:30 by ccravero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int	test_checkmap(t_data *d, int i, int j)
 {
 	if (i == 0 || i == d->map.map_height - 1
 		|| j == 0 || j == d->map.map_width - 1)
-		return (printf("Error 216\n"));
+		return (printf("Error : '0' near border\n"));
 	if ((d->map.tab[i + 1][j] != '0' && d->map.tab[i + 1][j] != '1')
 		|| (d->map.tab[i - 1][j] != '0' && d->map.tab[i - 1][j] != '1')
 		|| (d->map.tab[i][j + 1] != '0' && d->map.tab[i][j + 1] != '1')
 		|| (d->map.tab[i][j - 1] != '0' && d->map.tab[i][j - 1] != '1'))
-		return (printf("Error 221 : empty zone near a space\n"));
+		return (printf("Error : empty zone near a space\n"));
 	return (0);
 }
 
@@ -87,7 +87,7 @@ int	checkmap(t_data *d)
 				&& d->map.tab[i][j] != '2' && d->map.tab[i][j] != 'N'
 				&& d->map.tab[i][j] != 'S' && d->map.tab[i][j] != 'E'
 				&& d->map.tab[i][j] != 'W' && d->map.tab[i][j] != ' ')
-				return (printf("Error 212 invalid char in map : %d\n",
+				return (printf("Error : invalid char in map : %c\n",
 						d->map.tab[i][j]));
 			if (d->map.tab[i][j] == '0' )
 				if (test_checkmap(d, i, j))

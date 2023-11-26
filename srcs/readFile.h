@@ -36,7 +36,7 @@ char		*deletewhitespace(char *line);
 int			isallnb(char *line);
 
 // parseFile.c
-int			parsefile(t_data *data);
+int			parsefile(t_data *data, int lineread);
 int			getpath(char *line, char **path);
 int			getcolor(char *line, t_color *color);
 int			whichline(char *line);

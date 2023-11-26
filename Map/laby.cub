@@ -1,12 +1,12 @@
 C50,50,100
 
-NO /mnt/nfs/homes/cmartin-/Documents/Doing/Cub3D/image/textureN.xpm
+NO ./image/textureN.xpm
 F 100,50,50
 
 
-EA /mnt/nfs/homes/cmartin-/Documents/Doing/Cub3D/image/textureE.xpm
-SO /mnt/nfs/homes/cmartin-/Documents/Doing/Cub3D/image/textureS.xpm
-WE /mnt/nfs/homes/cmartin-/Documents/Doing/Cub3D/image/textureW.xpm
+EA ./image/textureE.xpm
+SO ./image/textureS.xpm
+WE ./image/textureW.xpm
 
         1111111111111111111111111
         1000000000110000000000001

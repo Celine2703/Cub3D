@@ -20,7 +20,7 @@ int	parse_map(t_data *data)
 
 	if (ft_startmap(data->file, &lines, 0))
 	{
-		printf("Error 42 : erreur dans l'importation de la map\n");
+		printf("Error : erreur dans l'importation de la map\n");
 		return (-1);
 	}
 	longest_line = find_longest(data->file, lines);
@@ -28,7 +28,7 @@ int	parse_map(t_data *data)
 	data->map.map_width = longest_line;
 	if (find_copy_map(data, lines) == -1)
 	{
-		printf("Error 31  : \n");
+		printf("Error : malloc error\n");
 		return (-1);
 	}
 	reverse_map(data->map);

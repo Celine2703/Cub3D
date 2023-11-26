@@ -51,8 +51,9 @@ int	ft_destroy_data(t_data *data)
 	if (data->base.image)
 		mlx_destroy_image(data->mlx, data->base.image);
 	i = 0;
-	while (data->textures[i].image)
-		mlx_destroy_image(data->mlx, data->textures[i++].image);
+	while (i < 4)
+		if (data->textures[i++].image)
+			mlx_destroy_image(data->mlx, data->textures[i - 1].image);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
