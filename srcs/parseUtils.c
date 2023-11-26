@@ -38,7 +38,6 @@ char	*deletewhitespace(char *line)
 		}
 		line++;
 	}
-	// printf("line : %s\n", ret);
 	return (ret);
 }
 
@@ -61,7 +60,6 @@ int	parse_error(t_data *data)
 	int	error;
 
 	error = parsefile(data);
-	// printf("err111or");
 	if (error != 0)
 	{
 		if (error == -1)
