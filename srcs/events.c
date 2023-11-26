@@ -6,7 +6,7 @@
 /*   By: cmartin- <cmartin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 22:14:59 by cmartin           #+#    #+#             */
-/*   Updated: 2023/11/26 12:21:52 by cmartin-         ###   ########.fr       */
+/*   Updated: 2023/11/26 12:24:54 by cmartin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ft_putmov(t_map map, t_player *player, long double angle)
 	t_wallhit	distance;
 	player->angle = angle;
 	distance = calcule_dist(map, *player, 0);
-	printf("distance.dist = %Lf\n", distance.dist);
-	printf("distance.x = %Lf\n", distance.x);
-	printf("distance.y = %Lf\n", distance.y);
+	// printf("distance.dist = %Lf\n", distance.dist);
+	// printf("distance.x = %Lf\n", distance.x);
+	// printf("distance.y = %Lf\n", distance.y);
 	if (distance.dist <= 0.20)
 		return;
 	else
@@ -100,14 +100,14 @@ int	ft_mov(t_map map, t_player *player, int key)
 
 int	ft_key(int key, t_data *data)
 {
+	printf("angle = %Lf\n", data->player.angle);
+	printf("posx = %Lf\n", data->player.posx);
+	printf("posy = %Lf\n", data->player.posy);
 	if (key == 65307)
 		ft_destroy_data(data);
 	if (data -> player.angle == 2 * M_PI)
 		data -> player.angle = 0;
 	if (ft_mov(data->map, &(data->player), key))
 		change_image(data);
-	// printf("angle = %Lf\n", data->player.angle);
-	// printf("posx = %Lf\n", data->player.posx);
-	// printf("posy = %Lf\n", data->player.posy);
 	return (0);
 }

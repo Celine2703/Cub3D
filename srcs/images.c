@@ -105,10 +105,11 @@ int initmlx(t_data *data)
 
     // (void)distance;
     // selectcolor(data, distance, 0.5441461);
-    // data->player.angle =  1.63;
-    // data->player.posx = 38.5;
-    // data->player.posy = 13.5;
-
+    // data->player.angle =  3.769911;
+    // data->player.posx = 24.049665;
+    // data->player.posy = 2.035536;
+    // calcule_dist(data->map, data->player, 0);
+    // printf("cdddddddddddddddddddddddddalcul dist %Lf\n", calcule_dist(data->map, data->player, 0).dist);
     // data->player.angle =  4.712389;
     // data->player.posx = 26.5;
     // data->player.posy = 1.9;
